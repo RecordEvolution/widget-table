@@ -5,7 +5,6 @@ export interface Column {
     type: string
     order: number
     width: string
-    align: string
     precision: number
     fontSize: string
     fontWeight: number
@@ -25,7 +24,6 @@ export interface Table {
 export interface Settings {
     title: string
     subTitle: string
-    backgroundColor: string
   }
 export interface InputData {
     settings: Settings
