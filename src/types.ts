@@ -1,32 +1,33 @@
 
+
+export interface Column {
+    header: string
+    type: string
+    order: number
+    width: string
+    align: string
+    precision: number
+    fontSize: string
+    fontWeight: number
+    color: string
+    border: string
+    stateMap: any
+}
+export interface Table {
+    headerFontSize: number
+    headerBackground: string
+    rowHeight: string
+    rowBorder: string
+    columns: Column[]
+    rows: any[]
+}
+
 export interface Settings {
     title: string
     subTitle: string
-    columnLayout: boolean
-  }
-
-export interface Data {
-    value: number
-    pivot: string
-}
-export interface Dataseries {
-    label: string
-    order: number
-    unit: string
-    labelColor: string
-    valueColor: string
-    averageLatest: number
-    labelFontSize: number
-    valueFontSize: number
     backgroundColor: string
-    data: Data[]
-    // not input values
-    needleValue: number 
-    range: number
-    ranges: number[]
-}
-
+  }
 export interface InputData {
     settings: Settings
-    dataseries: Dataseries[]
+    table: Table
 }

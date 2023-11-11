@@ -1,48 +1,49 @@
 {
   "settings": {
-    "title": "Value-Array",
-    "subTitle": "This shows a value for each dataseries",
-    "columnLayout": false,
+    "title": "Tabe",
+    "subTitle": "This shows a table",
     "backgroundColor": "white"
   },
-  "dataseries": [{
-    "label": "Demo Value A",
-    "unit": "°C",
-    "order": 1,
-    "valueColor": "black",
-    "labelColor": "grey",
-    "valueFontSize": 32,
-    "labelFontSize": 16,
-    "averageLatest": 1,
-    "data": [{
-      "value": 90,
-      "pivot": "Frankfurt"
+  "table": {
+    "headerFontSize": "24px",
+    "headerBackground": "#ddd",
+    "rowHeight": "50px",
+    "rowBorder": "1px solid #ddd",
+    "rows": [
+      ["ONLINE", "Elefant", 80, "lala", 22],
+      ["DISCONNECTED", "Tiger", 20, "lala", 2],
+      ["ONLINE", "Schlange", 30, "lala", -22],
+      ["ONLINE", "Delphin", 40, "lala", 12],
+      ["ONLINE", "Ameise", 50, "lala", -2]
+    ],
+    "columns": [{
+      "header": "State",
+      "width": "50px",
+      "type": "state",
+      "stateMap": {
+        "ONLINE": "green",
+        "DISCONNECTED": "red"
+      }
     },{
-      "value": 40,
-      "pivot": "Berlin"
+      "header": "Name",
+      "width": "320px",
+      "type": "string",
+      "fontSize": "12px",
+      "color": "green"
     },{
-      "value": 70,
-      "pivot": "Berlin"
+      "header": "Temperatur",
+      "columnWidth": "120px",
+      "type": "number",
+      "fontWeight": 100,
+      "precision": 2
     },{
-      "value": 200,
-      "pivot": "Frankfurt"
+      "header": "Bool",
+      "width": "20px",
+      "type": "boolean"
     },{
-      "value": 50,
-      "pivot": "Frankfurt"
+      "header": "Feuchtigkeit",
+      "width": "120px",
+      "type": "number"
     }]
-  },{
-    "label": "Demo Value B",
-    "order": 2,
-    "unit": "Pa",
-    "valueFontSize": 36,
-    "labelFontSize": 24,
-    "valueColor": "black",
-    "labelColor": "black",
-    "sections": [50, 70, 80, 90, 200],
-    "backgroundColor": "white",
-    "averageLatest": 1,
-    "data": [{
-      "value": 80
-    }]
-  }]
+  }
 }
