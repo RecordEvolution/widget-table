@@ -1,20 +1,20 @@
 {
   "settings": {
-    "title": "Tabe",
+    "title": "Table",
     "subTitle": "This shows a table",
     "backgroundColor": "white"
   },
   "table": {
-    "headerFontSize": "24px",
+    "headerFontSize": "16px",
     "headerBackground": "#ddd",
-    "rowHeight": "50px",
+    "rowHeight": "40px",
     "rowBorder": "1px solid #ddd",
     "rows": [
-      ["ONLINE", "Elefant", 80, "lala", 22],
-      ["DISCONNECTED", "Tiger", 20, "lala", 2],
-      ["ONLINE", "Schlange", 30, "lala", -22],
-      ["ONLINE", "Delphin", 40, "lala", 12],
-      ["ONLINE", "Ameise", 50, "lala", -2]
+      ["ONLINE", "Elefant", 80, "lala", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://google.com"],
+      ["DISCONNECTED", "Tiger", 20, false, "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1689604534849-prusa i3mk3s+-7e12f498e8.jpeg", "https://google.com"],
+      ["ONLINE", "Schlange", 30, true, "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://google.com"],
+      ["ONLINE", "Delphin", 40, 1, "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1689664341482-Record-Evolution_smart_camera_examples-6a33b6c051.png", "https://google.com"],
+      ["ONLINE", "Ameise", 50, 0, "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://google.com"]
     ],
     "columns": [{
       "header": "State",
@@ -26,13 +26,13 @@
       }
     },{
       "header": "Name",
-      "width": "320px",
+      "width": "120px",
       "type": "string",
-      "fontSize": "12px",
-      "color": "green"
+      "fontSize": "16px",
+      "color": "grey"
     },{
       "header": "Temperatur",
-      "columnWidth": "120px",
+      "width": "120px",
       "type": "number",
       "fontWeight": 100,
       "precision": 2
@@ -41,9 +41,14 @@
       "width": "20px",
       "type": "boolean"
     },{
-      "header": "Feuchtigkeit",
+      "header": "Image",
       "width": "120px",
-      "type": "number"
+      "type": "image"
+    },{
+      "header": "Button",
+      "width": "120px",
+      "type": "button",
+      "label": "Details"
     }]
   }
 }

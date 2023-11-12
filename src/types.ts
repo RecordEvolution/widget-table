@@ -11,6 +11,7 @@ export interface Column {
     color: string
     border: string
     stateMap: any
+    label: string
 }
 export interface Table {
     headerFontSize: number

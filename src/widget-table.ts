@@ -3,6 +3,9 @@ import { repeat } from 'lit/directives/repeat.js'
 import { property, state, customElement } from 'lit/decorators.js';
 import { InputData, Column } from './types.js'
 
+import '@material/web/icon/icon.js'
+import '@material/web/button/filled-tonal-button.js'
+
 @customElement('widget-table')
 export class WidgetTable extends LitElement {
   
@@ -42,19 +45,35 @@ export class WidgetTable extends LitElement {
   }
 
   renderBoolean(value: any, colDef: Column) {
-    return html`${value}`
+    return value ? html`<md-icon>check</md-icon>` : html`<md-icon>remove</md-icon>`
   }
 
   renderState(value: any, colDef: Column) {
-    return html`${value}`
+    return html`<div class="statusbox" style="background-color: ${colDef.stateMap[value]}"></div>`
   }
 
   renderButton(value: any, colDef: Column) {
-    return html`${value}`
+    return html`<a href="${value}"><md-filled-tonal-button>${colDef.label}</md-filled-tonal-button></a>`
   }
 
   renderImage(value: any, colDef: Column) {
-    return html`${value}`
+    return html`<img src="${value}"/>`
+  }
+
+  getTextAlign(colDef: Column) {
+    switch(colDef.type){
+      case 'number':
+        return 'end'
+      case 'button':
+      case 'string':
+        return 'start'
+      case 'boolean':
+      case 'state':
+      case 'image':
+        return 'center'
+      default:
+        return 'start'
+    }
   }
 
   static styles = css`
@@ -108,10 +127,30 @@ export class WidgetTable extends LitElement {
     }
     th,
     td {
-      padding: 8px 16px;
+      padding: 0px 16px;
+      box-sizing: border-box;
     }
     tr {
       border-bottom: 1px solid #ddd;
+    }
+
+    .statusbox {
+      width: 24px;
+      height: 12px;
+      margin: auto;
+      border-radius: 6px;
+    }
+
+    img {
+      width: 100%; /* Set the width of the container */
+      height: 100%;
+      object-fit: contain;
+    } 
+
+    md-filled-tonal-button {
+      --md-filled-tonal-button-container-color: #ddd;
+      --md-filled-tonal-button-label-text-font: sans-serif;
+      height: 24px;
     }
   `;
 
@@ -122,16 +161,17 @@ export class WidgetTable extends LitElement {
           return html`
             .column-${i} {
               width: ${col.width}; 
-              text-align: ${col.type === 'number' ? 'end': 'start'};
+              text-align: ${this.getTextAlign(col)};
               font-size: ${col.fontSize};
               font-weight: ${col.fontWeight};
               color: ${col.color};
               border: ${col.border};
+              height: ${this?.inputData?.table.rowHeight};
             }
 
             .header-${i} {
               width: ${col.width}; 
-              text-align: ${col.type === 'number' ? 'end': 'start'};
+              text-align: ${this.getTextAlign(col)};
               border: ${col.border};
             }
 
