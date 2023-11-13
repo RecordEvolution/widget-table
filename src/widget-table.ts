@@ -3,7 +3,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { property, state, customElement } from 'lit/decorators.js';
 import { InputData, Column } from './types.js'
 
-import '@material/web/icon/icon.js'
+// import '@material/web/icon/icon.js'
 // import '@material/web/button/filled-tonal-button.js'
 
 @customElement('widget-table')
