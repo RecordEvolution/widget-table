@@ -45,7 +45,7 @@ export class WidgetTable extends LitElement {
   }
 
   renderBoolean(value: any, colDef: Column) {
-    return value ? html`<md-icon>check</md-icon>` : html`<md-icon>remove</md-icon>`
+    return value ? '✓' : '-'
   }
 
   renderState(value: any, colDef: Column) {
