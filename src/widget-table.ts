@@ -116,7 +116,7 @@ export class WidgetTable extends LitElement {
       border-radius: 12px;
       /* border: 2px solid #ccc; */
     }
-    .tableFixHead thead th {
+    .tableFixHead thead {
       position: sticky;
       top: 0px;
       overflow-x: auto;
