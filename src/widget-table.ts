@@ -4,7 +4,7 @@ import { property, state, customElement } from 'lit/decorators.js';
 import { InputData, Column } from './types.js'
 
 import '@material/web/icon/icon.js'
-import '@material/web/button/filled-tonal-button.js'
+// import '@material/web/button/filled-tonal-button.js'
 
 @customElement('widget-table')
 export class WidgetTable extends LitElement {
@@ -53,7 +53,7 @@ export class WidgetTable extends LitElement {
   }
 
   renderButton(value: any, colDef: Column) {
-    return html`<a href="${value}"><md-filled-tonal-button>${colDef.label}</md-filled-tonal-button></a>`
+    return html`<a href="${value}">${colDef.label}</a>`
   }
 
   renderImage(value: any, colDef: Column) {
