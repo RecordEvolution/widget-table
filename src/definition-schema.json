@@ -34,7 +34,7 @@
                 },
                 "rowBorder": {
                     "title": "Row Border",
-                    "description": "You can describe the border in this way: '1px solid red' ",
+                    "description": "You can describe the border in this way: ''1px solid red'' ",
                     "type": "string"
                 },
                 "columns": {
@@ -51,7 +51,7 @@
                             },
                             "type": {
                                 "title": "Display Type",
-                                "description": "One of 'state', 'string', 'number', 'boolean', 'button', 'image'.",
+                                "description": "One of ''state'', ''string'', ''number'', ''boolean'', ''button'', ''image''.",
                                 "type": "string"
                             },
                             "order": {
@@ -82,7 +82,7 @@
                             },
                             "border": {
                                 "title": "Cell Border",
-                                "description": "You can describe the border in this way: '1px solid red'",
+                                "description": "You can describe the border in this way: ''1px solid red''",
                                 "type": "string"
                             },
                             "stateMap": {
