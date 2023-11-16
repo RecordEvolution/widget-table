@@ -78,7 +78,7 @@
                             },
                             "color": {
                                 "title": "Font Color",
-                                "type": "string"
+                                "type": "color"
                             },
                             "border": {
                                 "title": "Cell Border",
