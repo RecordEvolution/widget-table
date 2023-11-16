@@ -190,8 +190,8 @@ export class WidgetTable extends LitElement {
 
       <div class="wrapper">
         <header>
-            <h3 class="paging" ?active=${this.inputData?.settings.title}>${this.inputData?.settings.title}</h3>
-            <p class="paging" ?active=${this.inputData?.settings.subTitle}>${this.inputData?.settings.subTitle}</p>
+            <h3 class="paging" ?active=${this.inputData?.settings?.title}>${this.inputData?.settings?.title}</h3>
+            <p class="paging" ?active=${this.inputData?.settings?.subTitle}>${this.inputData?.settings?.subTitle}</p>
         </header>
         <div class="tableFixHead">
 
