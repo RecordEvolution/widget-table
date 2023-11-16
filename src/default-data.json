@@ -1,8 +1,6 @@
 {
   "settings": {
-    "title": "Table",
-    "subTitle": "This shows a table",
-    "backgroundColor": "white"
+
   },
   "table": {
     "headerFontSize": "16px",

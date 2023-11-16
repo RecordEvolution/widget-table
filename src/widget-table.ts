@@ -113,7 +113,7 @@ export class WidgetTable extends LitElement {
     .tableFixHead {
       overflow-y: auto;
       height: 100%;
-      border-radius: 12px;
+      /* border-radius: 12px; */
       /* border: 2px solid #ccc; */
     }
     .tableFixHead thead {
