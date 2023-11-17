@@ -81,7 +81,6 @@ export class WidgetTable extends LitElement {
       display: block;
       color: var(--widget-table-text-color, #000);
       font-family: sans-serif;
-      padding: 16px;
       box-sizing: border-box;
       position: relative;
       margin: auto;
