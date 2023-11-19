@@ -41,6 +41,7 @@ export class WidgetTable extends LitElement {
   }
 
   renderNumber(value: number, colDef: Column) {
+    if (isNaN(value)) return ''
     return html`${value?.toFixed(colDef.precision)}`
   }
 
