@@ -41,7 +41,7 @@ export class WidgetTable extends LitElement {
   }
 
   renderNumber(value: number, colDef: Column) {
-    return html`${value.toFixed(colDef.precision)}`
+    return html`${value?.toFixed(colDef.precision)}`
   }
 
   renderBoolean(value: any, colDef: Column) {
