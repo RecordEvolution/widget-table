@@ -3,9 +3,6 @@ import { repeat } from 'lit/directives/repeat.js'
 import { property, state, customElement } from 'lit/decorators.js';
 import { InputData, Column } from './types.js'
 
-// import '@material/web/icon/icon.js'
-// import '@material/web/button/filled-tonal-button.js'
-
 @customElement('widget-table')
 export class WidgetTable extends LitElement {
   
@@ -80,7 +77,6 @@ export class WidgetTable extends LitElement {
   static styles = css`
     :host {
       display: block;
-      color: var(--widget-table-text-color, #000);
       font-family: sans-serif;
       box-sizing: border-box;
       position: relative;
@@ -101,6 +97,7 @@ export class WidgetTable extends LitElement {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: var(--re-text-color, #000);
     }
     p {
       margin: 10px 0 16px 0;
@@ -108,13 +105,12 @@ export class WidgetTable extends LitElement {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: var(--re-text-color, #000);
     }
 
     .tableFixHead {
       overflow-y: auto;
       height: 100%;
-      /* border-radius: 12px; */
-      /* border: 2px solid #ccc; */
     }
     .tableFixHead thead {
       position: sticky;
@@ -151,6 +147,10 @@ export class WidgetTable extends LitElement {
       --md-filled-tonal-button-container-color: #ddd;
       --md-filled-tonal-button-label-text-font: sans-serif;
       height: 24px;
+    }
+
+    th {
+      color: var(--re-text-color, #000) !important;
     }
   `;
 
