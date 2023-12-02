@@ -205,7 +205,7 @@ export class WidgetTable extends LitElement {
               </tr>
             </thead>
             <tbody>
-              ${repeat(this.inputData?.table?.rows ?? [], (row, idx) => idx, (row) => {
+              ${repeat(this.inputData?.table?.rows.reverse() ?? [], (row, idx) => idx, (row) => {
                 return html`
                 <tr>
                   ${repeat(row, c => c, (cell, i) => html`
