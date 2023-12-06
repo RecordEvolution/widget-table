@@ -1,52 +1,46 @@
 {
   "settings": {
-
-  },
-  "table": {
+    "title": "test",
+    "subTitle": "kasdkfasdf",
     "headerFontSize": "16px",
     "headerBackground": "#ddd",
-    "rowHeight": "40px",
-    "rowBorder": "1px solid #ddd",
-    "rows": [
-      ["ONLINE", "Elefant", 80, "lala", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://google.com"],
-      ["DISCONNECTED", "Tiger", 20, false, "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1689604534849-prusa i3mk3s+-7e12f498e8.jpeg", "https://google.com"],
-      ["ONLINE", "Schlange", 30, true, "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://google.com"],
-      ["ONLINE", "Delphin", 40, 1, "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1689664341482-Record-Evolution_smart_camera_examples-6a33b6c051.png", "https://google.com"],
-      ["ONLINE", "Ameise", 50, 0, "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://google.com"]
-    ],
-    "columns": [{
-      "header": "State",
-      "width": "50px",
-      "type": "state",
-      "stateMap": {
-        "ONLINE": "green",
-        "DISCONNECTED": "red"
-      }
-    },{
-      "header": "Name",
-      "width": "120px",
-      "type": "string",
-      "fontSize": "16px",
-      "color": "grey"
-    },{
-      "header": "Temperatur",
-      "width": "120px",
-      "type": "number",
-      "fontWeight": 100,
-      "precision": 2
-    },{
-      "header": "Bool",
-      "width": "20px",
-      "type": "boolean"
-    },{
-      "header": "Image",
-      "width": "120px",
-      "type": "image"
-    },{
-      "header": "Button",
-      "width": "120px",
-      "type": "button",
-      "label": "Details"
-    }]
-  }
+    "rowHeight": "40px"
+  },
+  "columns": [{
+    "header": "State",
+    "width": "50px",
+    "type": "state",
+    "stateMap": "'ONLINE', 'green', 'DISCONNECTED', 'red'",
+    "values": ["ONLINE", "DISCONNECTED", "ONLINE", "ONLINE", "ONLINE"]
+  },{
+    "header": "Name",
+    "width": "120px",
+    "type": "string",
+    "fontSize": "16px",
+    "color": "grey",
+    "values": ["Elefant", "Tiger", "Schlange", "Delphin", "Ameise"]
+  },{
+    "header": "Temperatur",
+    "width": "120px",
+    "type": "number",
+    "fontWeight": 100,
+    "precision": 2,
+    "values": [80, 20, 30, 40, 50]
+  },{
+    "header": "Bool",
+    "width": "20px",
+    "type": "boolean",
+    "values": ["lala", false, true, 1, 0]
+  },{
+    "header": "Image",
+    "width": "120px",
+    "type": "image",
+    "values": ["https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png"]
+  },{
+    "header": "Button",
+    "width": "120px",
+    "type": "button",
+    "label": "Details",
+    "values": ["https://google.com", "https://google.com", "https://google.com", "https://google.com", "https://google.com"]
+  }]
 }

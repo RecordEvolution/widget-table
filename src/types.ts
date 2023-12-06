@@ -3,7 +3,6 @@
 export interface Column {
     header: string
     type: string
-    order: number
     width: string
     precision: number
     fontSize: string
@@ -11,22 +10,19 @@ export interface Column {
     color: string
     border: string
     stateMap: any
-    label: string
-}
-export interface Table {
-    headerFontSize: number
-    headerBackground: string
-    rowHeight: string
-    rowBorder: string
-    columns: Column[]
-    rows: any[]
+    values: any[]
 }
 
 export interface Settings {
     title: string
     subTitle: string
+    headerFontSize: number
+    headerBackground: string
+    rowHeight: string
+    rowBorder: string
   }
 export interface InputData {
     settings: Settings
-    table: Table
+    columns: Column[]
+    rows: any[][]
 }

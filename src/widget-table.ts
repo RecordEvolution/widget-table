@@ -9,13 +9,29 @@ export class WidgetTable extends LitElement {
   @property({type: Object}) 
   inputData?: InputData = undefined
 
-  constructor() {
-    super()
+  update(changedProperties: Map<string, any>) {
+    if (changedProperties.has('inputData')) {
+      this.transformInputData()
+    }
+    super.update(changedProperties)
+  }
 
+  transformInputData() {
+
+    if (!this?.inputData?.columns.length) return
+
+    const rows: any[][] = []
+    this.inputData.columns.forEach((col, i) => {
+      col.values.forEach((v, j) =>{
+        if (rows.length <= j) rows.push([])
+        rows[j].push(v)
+      }) 
+    })
+    this.inputData.rows = rows
   }
 
   renderCell(value: any, i: number) {
-    const colDef = this?.inputData?.table.columns[i]
+    const colDef = this?.inputData?.columns[i]
 
     switch(colDef?.type) {
       case "string":
@@ -47,11 +63,16 @@ export class WidgetTable extends LitElement {
   }
 
   renderState(value: any, colDef: Column) {
-    return html`<div class="statusbox" style="background-color: ${colDef.stateMap[value]}"></div>`
+    const _stateMap = colDef.stateMap.split(',').map((d: string) => d.trim().replaceAll("'", ''))
+    const stateMap = _stateMap.reduce((p: any, c: string, i: number, a: any[]) => {
+      if (i%2 === 0) p[c] = a[i+1]
+      return p
+    }, {})
+    return html`<div class="statusbox" style="background-color: ${stateMap[value]}"></div>`
   }
 
   renderButton(value: any, colDef: Column) {
-    return html`<a href="${value}">${colDef.label}</a>`
+    return html`<a href="${value}">${colDef.header}</a>`
   }
 
   renderImage(value: any, colDef: Column) {
@@ -97,6 +118,8 @@ export class WidgetTable extends LitElement {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      padding: 16px 0px 0px 16px;
+      box-sizing: border-box;
       color: var(--re-text-color, #000);
     }
     p {
@@ -105,6 +128,8 @@ export class WidgetTable extends LitElement {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      padding-left: 16px;
+      box-sizing: border-box;
       color: var(--re-text-color, #000);
     }
 
@@ -125,9 +150,6 @@ export class WidgetTable extends LitElement {
     td {
       padding: 0px 16px;
       box-sizing: border-box;
-    }
-    tr {
-      border-bottom: 1px solid #ddd;
     }
 
     .statusbox {
@@ -157,7 +179,7 @@ export class WidgetTable extends LitElement {
   render() {
     return html`
       <style>
-        ${repeat(this.inputData?.table?.columns ?? [], (col, i) => i, (col, i) => {
+        ${repeat(this.inputData?.columns ?? [], (col, i) => i, (col, i) => {
           return html`
             .column-${i} {
               width: ${col.width}; 
@@ -166,7 +188,7 @@ export class WidgetTable extends LitElement {
               font-weight: ${col.fontWeight};
               color: ${col.color};
               border: ${col.border};
-              height: ${this?.inputData?.table.rowHeight};
+              height: ${this?.inputData?.settings.rowHeight};
             }
 
             .header-${i} {
@@ -176,13 +198,13 @@ export class WidgetTable extends LitElement {
             }
 
             thead {
-              font-size: ${this?.inputData?.table.headerFontSize};
-              background: ${this?.inputData?.table.headerBackground};
+              font-size: ${this?.inputData?.settings.headerFontSize};
+              background: ${this?.inputData?.settings.headerBackground};
             }
 
             tr {
-              height: ${this?.inputData?.table.rowHeight};
-              border-bottom: ${this?.inputData?.table.rowBorder};
+              height: ${this?.inputData?.settings.rowHeight};
+              border-bottom: ${this?.inputData?.settings.rowBorder ?? '1px solid #ddd'};
             }
         `})}
       </style>
@@ -198,14 +220,14 @@ export class WidgetTable extends LitElement {
           <table>
           <thead>
               <tr>
-                ${repeat(this.inputData?.table?.columns ?? [], col => col, (col, i) => {
+                ${repeat(this.inputData?.columns ?? [], col => col, (col, i) => {
                   return html`
                   <th class="header-${i}">${col.header}</th>  
                 `})}
               </tr>
             </thead>
             <tbody>
-              ${repeat(this.inputData?.table?.rows.reverse() ?? [], (row, idx) => idx, (row) => {
+              ${repeat(this.inputData?.rows.reverse() ?? [], (row, idx) => idx, (row) => {
                 return html`
                 <tr>
                   ${repeat(row, c => c, (cell, i) => html`

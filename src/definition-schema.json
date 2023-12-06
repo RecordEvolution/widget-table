@@ -3,7 +3,7 @@
     "type": "object",
     "properties": {
         "settings": {
-            "title": "Global Settings",
+            "title": "Settings",
             "type": "object",
             "properties": {
                 "title": {
@@ -13,13 +13,7 @@
                 "subTitle": {
                     "title": "Subtitle",
                     "type": "string"
-                }
-            }
-        },
-        "table": {
-            "title": "Gauges",
-            "type": "object",
-            "properties": {
+                },
                 "headerFontSize": {
                     "title": "Header Font Size",
                     "type": "string"
@@ -36,66 +30,78 @@
                     "title": "Row Border",
                     "description": "You can describe the border in this way: ''1px solid red'' ",
                     "type": "string"
-                },
-                "columns": {
-                    "title": "Column Definition",
-                    "description": "Choose the columns and define how they should be displayed.",
-                    "type": "array",
-                    "buffersize": 1000,
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "header": {
-                                "title": "Header",
-                                "type": "string"
-                            },
-                            "type": {
-                                "title": "Display Type",
-                                "description": "One of ''state'', ''string'', ''number'', ''boolean'', ''button'', ''image''.",
-                                "type": "string"
-                            },
-                            "order": {
-                                "title": "Column Order",
-                                "type": "string"
-                            },
-                            "width": {
-                                "title": "Width",
-                                "type": "string"
-                            },
-                            "precision": {
-                                "title": "Number Precision",
-                                "description": "Number of digits after the decimal point.",
-                                "type": "string"
-                            },
-                            "fontSize": {
-                                "title": "Font Size",
-                                "type": "string"
-                            },
-                            "fontWeight": {
-                                "title": "Font Weight",
-                                "description": "eg. 800 for bold and 100 for light font.",
-                                "type": "string"
-                            },
-                            "color": {
-                                "title": "Font Color",
-                                "type": "color"
-                            },
-                            "border": {
-                                "title": "Cell Border",
-                                "description": "You can describe the border in this way: ''1px solid red''",
-                                "type": "string"
-                            },
-                            "stateMap": {
-                                "title": "State Map",
-                                "description": "Applicabal for State fields only. Describe the State Map as { \"ONLINE\": \"green\", \"OFFLINE\": \"red\"}",
-                                "type": "string"
-                            }
-                        },
-                        "required": []
-                    }
                 }
-            },
-            "required": []
+            }
+        },
+        "columns": {
+            "title": "Column Definition",
+            "description": "Choose the columns and define how they should be displayed.",
+            "type": "array",
+            "buffersize": 1000,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "header": {
+                        "title": "Header Label",
+                        "type": "string",
+                        "order": 1
+                    },
+                    "type": {
+                        "title": "Data Type",
+                        "enum": ["state", "string", "number", "boolean", "button", "image"],
+                        "type": "string",
+                        "order": 2
+                    },
+                    "precision": {
+                        "title": "Number Precision",
+                        "description": "Number of digits after the decimal point.",
+                        "type": "string",
+                        "order": 4
+                    },
+                    "width": {
+                        "title": "Column Width",
+                        "type": "string",
+                        "order": 5
+                    },
+                    "fontSize": {
+                        "title": "Font Size",
+                        "type": "string",
+                        "order": 6
+                    },
+                    "fontWeight": {
+                        "title": "Font Weight",
+                        "description": "eg. 800 for bold and 100 for light font.",
+                        "type": "string",
+                        "order": 7
+                    },
+                    "color": {
+                        "title": "Font Color",
+                        "type": "color",
+                        "order": 8
+                    },
+                    "border": {
+                        "title": "Cell Border",
+                        "description": "You can describe the border in this way: '1px solid red'",
+                        "type": "string",
+                        "order": 9
+                    },
+                    "stateMap": {
+                        "title": "State Map",
+                        "description": "Applicable for datatype 'state' fields only. Describe the State Map as an alternating list like this: \"'ONLINE': 'green', 'DISCONNECTED', 'red'\"",
+                        "type": "string",
+                        "order": 10
+                    },
+                    "values": {
+                        "title": "Values",
+                        "type": "array",
+                        "order": 11,
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": ["header"]
+            }
         }
     }
 }
