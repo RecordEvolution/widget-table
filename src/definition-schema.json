@@ -44,6 +44,7 @@
                     "header": {
                         "title": "Header Label",
                         "type": "string",
+                        "required": true,
                         "order": 1
                     },
                     "type": {
@@ -99,8 +100,7 @@
                             "type": "string"
                         }
                     }
-                },
-                "required": ["header"]
+                }
             }
         }
     }
