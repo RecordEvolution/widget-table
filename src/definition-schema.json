@@ -3,7 +3,7 @@
     "type": "object",
     "properties": {
         "settings": {
-            "title": "Settings",
+            "title": "Table Settings",
             "type": "object",
             "properties": {
                 "title": {
