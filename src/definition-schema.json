@@ -4,31 +4,38 @@
     "properties": {
         "settings": {
             "title": "Table Settings",
+            "order": 1,
             "type": "object",
             "properties": {
                 "title": {
                     "title": "Title",
+                    "order": 1,
                     "type": "string"
                 },
                 "subTitle": {
                     "title": "Subtitle",
+                    "order": 2,
                     "type": "string"
                 },
                 "headerFontSize": {
                     "title": "Header Font Size",
+                    "order": 3,
                     "type": "string"
                 },
                 "headerBackground": {
                     "title": "Header Background Color",
+                    "order": 4,
                     "type": "color"
                 },
                 "rowHeight": {
                     "title": "Row Height",
+                    "order": 5,
                     "type": "string"
                 },
                 "rowBorder": {
                     "title": "Row Border",
                     "description": "You can describe the border in this way: ''1px solid red'' ",
+                    "order": 6,
                     "type": "string"
                 }
             }
@@ -37,7 +44,8 @@
             "title": "Column Definition",
             "description": "Choose the columns and define how they should be displayed.",
             "type": "array",
-            "buffersize": 1000,
+            "order": 2,
+            "buffersize": 100,
             "items": {
                 "type": "object",
                 "properties": {
@@ -49,7 +57,14 @@
                     },
                     "type": {
                         "title": "Data Type",
-                        "enum": ["state", "string", "number", "boolean", "button", "image"],
+                        "enum": [
+                            "state",
+                            "string",
+                            "number",
+                            "boolean",
+                            "button",
+                            "image"
+                        ],
                         "type": "string",
                         "order": 2
                     },
@@ -57,45 +72,45 @@
                         "title": "Number Precision",
                         "description": "Number of digits after the decimal point.",
                         "type": "string",
-                        "order": 4
+                        "order": 3
                     },
                     "width": {
                         "title": "Column Width",
                         "type": "string",
-                        "order": 5
+                        "order": 4
                     },
                     "fontSize": {
                         "title": "Font Size",
                         "type": "string",
-                        "order": 6
+                        "order": 5
                     },
                     "fontWeight": {
                         "title": "Font Weight",
                         "description": "eg. 800 for bold and 100 for light font.",
                         "type": "string",
-                        "order": 7
+                        "order": 6
                     },
                     "color": {
                         "title": "Font Color",
                         "type": "color",
-                        "order": 8
+                        "order": 7
                     },
                     "border": {
                         "title": "Cell Border",
                         "description": "You can describe the border in this way: '1px solid red'",
                         "type": "string",
-                        "order": 9
+                        "order": 8
                     },
                     "stateMap": {
                         "title": "State Map",
                         "description": "Applicable for datatype 'state' fields only. Describe the State Map as an alternating list like this: \"'ONLINE': 'green', 'DISCONNECTED', 'red'\"",
                         "type": "string",
-                        "order": 10
+                        "order": 9
                     },
                     "values": {
                         "title": "Values",
                         "type": "array",
-                        "order": 11,
+                        "order": 10,
                         "items": {
                             "type": "string"
                         }
