@@ -1,7 +1,5 @@
 {
   "settings": {
-    "title": "test",
-    "subTitle": "kasdkfasdf",
     "headerFontSize": "16px",
     "headerBackground": "#ddd",
     "rowHeight": "40px"
