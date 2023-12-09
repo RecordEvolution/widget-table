@@ -5,12 +5,12 @@
     "author": "widget-table",
     "version": "1.0.3",
     "type": "module",
-    "main": "dist/src/index.js",
-    "module": "dist/src/index.js",
-    "exports": {
-        ".": "./dist/src/index.js",
-        "./widget-table.js": "./dist/src/widget-table.js"
-    },
+    "main": "dist/widget-table.js",
+    "types": "dist/src/widget-table.d.ts",
+    "files": [
+        "dist",
+        "src"
+    ],
     "scripts": {
         "analyze": "cem analyze --litelement",
         "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
