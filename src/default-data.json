@@ -8,27 +8,27 @@
     "header": "State",
     "width": "50px",
     "type": "state",
-    "stateMap": "'ONLINE', 'green', 'DISCONNECTED', 'red'",
-    "values": ["ONLINE", "DISCONNECTED", "ONLINE", "ONLINE", "ONLINE"]
+    "stateMap": "'ONLINE', '#6e9a69', 'DISCONNECTED', '#e15656'",
+    "values": ["ONLINE", "DISCONNECTED", "ONLINE", "ONLINE", "DISCONNECTED"]
   },{
     "header": "Name",
     "width": "120px",
     "type": "string",
     "fontSize": "16px",
     "color": "grey",
-    "values": ["Elefant", "Tiger", "Schlange", "Delphin", "Ameise"]
+    "values": ["Royal Fortune", "Mayflower", "Flying King", "Snap Dragon", "Schonerbrigg Asgard"]
   },{
-    "header": "Temperatur",
+    "header": "Distance",
     "width": "120px",
     "type": "number",
     "fontWeight": 100,
     "precision": 2,
     "values": [80, 20, 30, 40, 50]
   },{
-    "header": "Bool",
+    "header": "Active",
     "width": "20px",
     "type": "boolean",
-    "values": ["lala", false, true, 1, 0]
+    "values": [true, false, true, true, false]
   },{
     "header": "Image",
     "width": "120px",
