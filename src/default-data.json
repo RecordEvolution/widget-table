@@ -1,7 +1,7 @@
 {
   "settings": {
     "headerFontSize": "16px",
-    "headerBackground": "#ddd",
+    "headerBackground": "#fcfcfc",
     "rowHeight": "40px"
   },
   "columns": [{
