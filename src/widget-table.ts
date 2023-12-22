@@ -9,6 +9,8 @@ export class WidgetTable extends LitElement {
   @property({type: Object}) 
   inputData?: InputData = undefined
 
+  version: string = 'versionplaceholder'
+
   update(changedProperties: Map<string, any>) {
     if (changedProperties.has('inputData')) {
       this.transformInputData()
