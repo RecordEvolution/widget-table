@@ -1,5 +1,3 @@
-
-
 export interface Column {
     header: string
     type: string
@@ -20,7 +18,7 @@ export interface Settings {
     headerBackground: string
     rowHeight: string
     rowBorder: string
-  }
+}
 export interface InputData {
     settings: Settings
     columns: Column[]

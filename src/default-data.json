@@ -1,44 +1,63 @@
 {
-  "settings": {
-    "headerFontSize": "16px",
-    "headerBackground": "#fcfcfc",
-    "rowHeight": "40px"
-  },
-  "columns": [{
-    "header": "State",
-    "width": "50px",
-    "type": "state",
-    "stateMap": "'ONLINE', '#6e9a69', 'DISCONNECTED', '#e15656'",
-    "values": ["ONLINE", "DISCONNECTED", "ONLINE", "ONLINE", "DISCONNECTED"]
-  },{
-    "header": "Name",
-    "width": "120px",
-    "type": "string",
-    "fontSize": "16px",
-    "color": "grey",
-    "values": ["Royal Fortune", "Mayflower", "Flying King", "Snap Dragon", "Schonerbrigg Asgard"]
-  },{
-    "header": "Distance",
-    "width": "120px",
-    "type": "number",
-    "fontWeight": 100,
-    "precision": 2,
-    "values": [80, 20, 30, 40, 50]
-  },{
-    "header": "Active",
-    "width": "20px",
-    "type": "boolean",
-    "values": [true, false, true, true, false]
-  },{
-    "header": "Image",
-    "width": "120px",
-    "type": "image",
-    "values": ["https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png", "https://storage.googleapis.com/reswarm-images/prod/reswarm-0-1693403112243-mir200-0eb8e1fd91.png"]
-  },{
-    "header": "Button",
-    "width": "120px",
-    "type": "button",
-    "label": "Details",
-    "values": ["https://google.com", "https://google.com", "https://google.com", "https://google.com", "https://google.com"]
-  }]
+    "settings": {
+        "headerFontSize": "16px",
+        "headerBackground": "#fcfcfc",
+        "rowHeight": "40px"
+    },
+    "columns": [
+        {
+            "header": "State",
+            "width": "50px",
+            "type": "state",
+            "stateMap": "'ONLINE', '#6e9a69', 'DISCONNECTED', '#e15656'",
+            "values": ["ONLINE", "DISCONNECTED", "ONLINE", "ONLINE", "DISCONNECTED"]
+        },
+        {
+            "header": "Name",
+            "width": "120px",
+            "type": "string",
+            "fontSize": "16px",
+            "color": "grey",
+            "values": ["Royal Fortune", "Mayflower", "Flying King", "Snap Dragon", "Schonerbrigg Asgard"]
+        },
+        {
+            "header": "Distance",
+            "width": "120px",
+            "type": "number",
+            "fontWeight": 100,
+            "precision": 2,
+            "values": [80, 20, 30, 40, 50]
+        },
+        {
+            "header": "Active",
+            "width": "20px",
+            "type": "boolean",
+            "values": [true, false, true, true, false]
+        },
+        {
+            "header": "Image",
+            "width": "120px",
+            "type": "image",
+            "values": [
+                "https://storage.googleapis.com/reswarm-images/mir-200.png",
+                "https://storage.googleapis.com/reswarm-images/mir-200.png",
+                "https://storage.googleapis.com/reswarm-images/mir-200.png",
+                "https://storage.googleapis.com/reswarm-images/mir-200.png",
+                "https://storage.googleapis.com/reswarm-images/mir-200.png"
+            ]
+        },
+        {
+            "header": "Button",
+            "width": "120px",
+            "type": "button",
+            "label": "Details",
+            "values": [
+                "https://google.com",
+                "https://google.com",
+                "https://google.com",
+                "https://google.com",
+                "https://google.com"
+            ]
+        }
+    ]
 }

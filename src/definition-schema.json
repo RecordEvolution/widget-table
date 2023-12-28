@@ -57,14 +57,7 @@
                     },
                     "type": {
                         "title": "Data Type",
-                        "enum": [
-                            "state",
-                            "string",
-                            "number",
-                            "boolean",
-                            "button",
-                            "image"
-                        ],
+                        "enum": ["state", "string", "number", "boolean", "button", "image"],
                         "type": "string",
                         "order": 2
                     },
