@@ -1,12 +1,17 @@
 import { html, css, LitElement } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
 import { property, state, customElement } from 'lit/decorators.js'
-import { InputData, Column } from './types.js'
+import { TableChartConfiguration } from './definition-schema.js'
+
+type Column = Exclude<TableChartConfiguration['columns'], undefined>[number]
 
 @customElement('widget-table-versionplaceholder')
 export class WidgetTable extends LitElement {
     @property({ type: Object })
-    inputData?: InputData = undefined
+    inputData?: TableChartConfiguration
+
+    @state()
+    rows: any[] = []
 
     version: string = 'versionplaceholder'
 
@@ -18,20 +23,20 @@ export class WidgetTable extends LitElement {
     }
 
     transformInputData() {
-        if (!this?.inputData?.columns.length) return
+        if (!this?.inputData?.columns?.length) return
 
         const rows: any[][] = []
         this.inputData.columns.forEach((col, i) => {
-            col.values.forEach((v, j) => {
+            col.values?.forEach((v, j) => {
                 if (rows.length <= j) rows.push([])
                 rows[j].push(v)
             })
         })
-        this.inputData.rows = rows
+        this.rows = rows
     }
 
     renderCell(value: any, i: number) {
-        const colDef = this?.inputData?.columns[i]
+        const colDef = this?.inputData?.columns?.[i]
 
         switch (colDef?.type) {
             case 'string':
@@ -55,7 +60,7 @@ export class WidgetTable extends LitElement {
 
     renderNumber(value: number, colDef: Column) {
         if (typeof value !== 'number' || isNaN(value)) return ''
-        return html`${value?.toFixed(colDef.precision)}`
+        return html`${value?.toFixed(colDef?.precision)}`
     }
 
     renderBoolean(value: any, colDef: Column) {
@@ -63,8 +68,8 @@ export class WidgetTable extends LitElement {
     }
 
     renderState(value: any, colDef: Column) {
-        const _stateMap = colDef.stateMap.split(',').map((d: string) => d.trim().replaceAll("'", ''))
-        const stateMap = _stateMap.reduce((p: any, c: string, i: number, a: any[]) => {
+        const _stateMap = colDef.stateMap?.split(',').map((d: string) => d.trim().replaceAll("'", ''))
+        const stateMap = _stateMap?.reduce((p: any, c: string, i: number, a: any[]) => {
             if (i % 2 === 0) p[c] = a[i + 1]
             return p
         }, {})
@@ -188,12 +193,12 @@ export class WidgetTable extends LitElement {
                         return html`
                             .column-${i} { width: ${col.width}; text-align: ${this.getTextAlign(col)};
                             font-size: ${col.fontSize}; font-weight: ${col.fontWeight}; color: ${col.color};
-                            border: ${col.border}; height: ${this?.inputData?.settings.rowHeight}; }
+                            border: ${col.border}; height: ${this?.inputData?.settings?.rowHeight}; }
                             .header-${i} { width: ${col.width}; text-align: ${this.getTextAlign(col)}; border:
-                            ${col.border}; } thead { font-size: ${this?.inputData?.settings.headerFontSize};
-                            background: ${this?.inputData?.settings.headerBackground}; } tr { height:
-                            ${this?.inputData?.settings.rowHeight}; border-bottom:
-                            ${this?.inputData?.settings.rowBorder ?? '1px solid #ddd'}; }
+                            ${col.border}; } thead { font-size: ${this?.inputData?.settings?.headerFontSize};
+                            background: ${this?.inputData?.settings?.headerBackground}; } tr { height:
+                            ${this?.inputData?.settings?.rowHeight}; border-bottom:
+                            ${this?.inputData?.settings?.rowBorder ?? '1px solid #ddd'}; }
                         `
                     }
                 )}
@@ -223,7 +228,7 @@ export class WidgetTable extends LitElement {
                         </thead>
                         <tbody>
                             ${repeat(
-                                this.inputData?.rows.reverse() ?? [],
+                                this.rows.reverse() ?? [],
                                 (row, idx) => idx,
                                 (row) => {
                                     return html` <tr>

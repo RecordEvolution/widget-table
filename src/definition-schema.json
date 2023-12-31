@@ -25,7 +25,8 @@
                 "headerBackground": {
                     "title": "Header Background Color",
                     "order": 4,
-                    "type": "color"
+                    "type": "string",
+                    "color": true
                 },
                 "rowHeight": {
                     "title": "Row Height",
@@ -48,6 +49,7 @@
             "buffersize": 100,
             "items": {
                 "type": "object",
+                "required": ["header"],
                 "properties": {
                     "header": {
                         "title": "Header Label",
@@ -64,12 +66,12 @@
                     "precision": {
                         "title": "Number Precision",
                         "description": "Number of digits after the decimal point.",
-                        "type": "string",
+                        "type": "number",
                         "order": 3
                     },
                     "width": {
                         "title": "Column Width",
-                        "type": "string",
+                        "type": "number",
                         "order": 4
                     },
                     "fontSize": {
@@ -85,7 +87,8 @@
                     },
                     "color": {
                         "title": "Font Color",
-                        "type": "color",
+                        "type": "string",
+                        "color": true,
                         "order": 7
                     },
                     "border": {
