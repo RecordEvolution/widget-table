@@ -49,7 +49,6 @@
             "buffersize": 100,
             "items": {
                 "type": "object",
-                "required": ["header"],
                 "properties": {
                     "header": {
                         "title": "Header Label",
