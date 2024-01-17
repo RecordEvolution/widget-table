@@ -25,7 +25,7 @@
                 "headerBackground": {
                     "title": "Header Background Color",
                     "order": 4,
-                    "type": "string",
+                    "type": "color",
                     "color": true
                 },
                 "rowHeight": {
@@ -86,7 +86,7 @@
                     },
                     "color": {
                         "title": "Font Color",
-                        "type": "string",
+                        "type": "color",
                         "color": true,
                         "order": 7
                     },
