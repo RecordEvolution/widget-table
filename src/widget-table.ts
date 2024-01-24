@@ -77,7 +77,7 @@ export class WidgetTable extends LitElement {
     }
 
     renderButton(value: any, colDef: Column) {
-        return html`<a href="${value}">${colDef.header}</a>`
+        return html`<a href="${value}" target="_blank">${colDef.header}</a>`
     }
 
     renderImage(value: any, colDef: Column) {
