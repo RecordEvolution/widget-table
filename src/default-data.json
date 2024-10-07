@@ -1,5 +1,5 @@
 {
-    "settings": {
+    "styling": {
         "headerFontSize": "16px",
         "headerBackground": "#fcfcfc",
         "rowHeight": "40px"
@@ -7,36 +7,43 @@
     "columns": [
         {
             "header": "State",
-            "width": "50px",
             "type": "state",
-            "stateMap": "'ONLINE', '#6e9a69', 'DISCONNECTED', '#e15656'",
-            "values": ["ONLINE", "DISCONNECTED", "ONLINE", "ONLINE", "DISCONNECTED"]
+            "values": ["ONLINE", "DISCONNECTED", "ONLINE", "ONLINE", "DISCONNECTED"],
+            "styling": {
+                "stateMap": "'ONLINE', '#6e9a69', 'DISCONNECTED', '#e15656'",
+                "width": "50px"
+            }
         },
         {
             "header": "Name",
-            "width": "120px",
             "type": "string",
-            "fontSize": "16px",
-            "color": "grey",
-            "values": ["Royal Fortune", "Mayflower", "Flying King", "Snap Dragon", "Schonerbrigg Asgard"]
+            "values": ["Royal Fortune", "Mayflower", "Flying King", "Snap Dragon", "Schonerbrigg Asgard"],
+            "styling": {
+                "width": "120px",
+                "fontSize": "16px",
+                "color": "grey"
+            }
         },
         {
             "header": "Distance",
-            "width": "120px",
             "type": "number",
-            "fontWeight": 100,
-            "precision": 2,
-            "values": [80, 20, 30, 40, 50]
+            "values": [80, 20, 30, 40, 50],
+            "styling": {
+                "width": "120px",
+                "fontWeight": 100,
+                "precision": 2
+            }
         },
         {
             "header": "Active",
-            "width": "20px",
             "type": "boolean",
-            "values": [true, false, true, true, false]
+            "values": [true, false, true, true, false],
+            "styling": {
+                "width": "20px"
+            }
         },
         {
             "header": "Image",
-            "width": "120px",
             "type": "image",
             "values": [
                 "https://storage.googleapis.com/reswarm-images/mir-200.png",
@@ -44,20 +51,24 @@
                 "https://storage.googleapis.com/reswarm-images/mir-200.png",
                 "https://storage.googleapis.com/reswarm-images/mir-200.png",
                 "https://storage.googleapis.com/reswarm-images/mir-200.png"
-            ]
+            ],
+            "styling": {
+                "width": "120px"
+            }
         },
         {
             "header": "Button",
-            "width": "120px",
             "type": "button",
-            "label": "Details",
             "values": [
                 "https://google.com",
                 "https://google.com",
                 "https://google.com",
                 "https://google.com",
                 "https://google.com"
-            ]
+            ],
+            "styling": {
+                "width": "120px"
+            }
         }
     ]
 }

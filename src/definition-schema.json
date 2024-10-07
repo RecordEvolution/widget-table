@@ -1,22 +1,22 @@
 {
-    "title": "Table-chart Configuration",
+    "title": "InputData",
     "type": "object",
     "properties": {
-        "settings": {
-            "title": "Table Settings",
+        "title": {
+            "title": "Title",
             "order": 1,
+            "type": "string"
+        },
+        "subTitle": {
+            "title": "Subtitle",
+            "order": 2,
+            "type": "string"
+        },
+        "styling": {
+            "title": "Table Styling",
+            "order": 3,
             "type": "object",
             "properties": {
-                "title": {
-                    "title": "Title",
-                    "order": 1,
-                    "type": "string"
-                },
-                "subTitle": {
-                    "title": "Subtitle",
-                    "order": 2,
-                    "type": "string"
-                },
                 "headerFontSize": {
                     "title": "Header Font Size",
                     "order": 3,
@@ -42,10 +42,10 @@
             }
         },
         "columns": {
-            "title": "Column Definition",
-            "description": "Choose the columns and define how they should be displayed.",
+            "title": "Column Definitions",
+            "description": "Add columns and define how they should be displayed.",
             "type": "array",
-            "order": 2,
+            "order": 4,
             "buffersize": 100,
             "items": {
                 "type": "object",
@@ -62,54 +62,64 @@
                         "type": "string",
                         "order": 2
                     },
-                    "precision": {
-                        "title": "Number Precision",
-                        "description": "Number of digits after the decimal point.",
-                        "type": "number",
-                        "order": 3
-                    },
-                    "width": {
-                        "title": "Column Width",
-                        "type": "number",
-                        "order": 4
-                    },
-                    "fontSize": {
-                        "title": "Font Size",
-                        "type": "string",
-                        "order": 5
-                    },
-                    "fontWeight": {
-                        "title": "Font Weight",
-                        "description": "eg. 800 for bold and 100 for light font.",
-                        "type": "string",
-                        "order": 6
-                    },
-                    "color": {
-                        "title": "Font Color",
-                        "type": "color",
-                        "color": true,
-                        "order": 7
-                    },
-                    "border": {
-                        "title": "Cell Border",
-                        "description": "You can describe the border in this way: '1px solid red'",
-                        "type": "string",
-                        "order": 8
-                    },
-                    "stateMap": {
-                        "title": "State Map",
-                        "description": "Applicable for datatype 'state' fields only. Describe the State Map as an alternating list like this: \"'ONLINE': 'green', 'DISCONNECTED', 'red'\"",
-                        "type": "string",
-                        "order": 9
-                    },
                     "values": {
                         "title": "Values",
                         "type": "array",
-                        "order": 10,
+                        "order": 3,
                         "items": {
                             "type": "string"
                         }
+                    },
+
+                    "styling": {
+                        "title": "Styling",
+                        "description": "",
+                        "type": "object",
+                        "order": 5,
+                        "properties": {
+                            "precision": {
+                                "title": "Number Precision",
+                                "description": "Number of digits after the decimal point.",
+                                "type": "number",
+                                "order": 3
+                            },
+                            "stateMap": {
+                                "title": "State Map",
+                                "description": "Applicable for datatype 'state' fields only. Describe the State Map as an alternating list like this: \"'ONLINE': 'green', 'DISCONNECTED', 'red'\"",
+                                "type": "string",
+                                "order": 4
+                            },
+                            "width": {
+                                "title": "Column Width",
+                                "type": "number",
+                                "order": 5
+                            },
+                            "fontSize": {
+                                "title": "Font Size",
+                                "type": "string",
+                                "order": 6
+                            },
+                            "fontWeight": {
+                                "title": "Font Weight",
+                                "description": "eg. 800 for bold and 100 for light font.",
+                                "type": "string",
+                                "order": 7
+                            },
+                            "color": {
+                                "title": "Font Color",
+                                "type": "color",
+                                "color": true,
+                                "order": 8
+                            },
+                            "border": {
+                                "title": "Cell Border",
+                                "description": "You can describe the border in this way: '1px solid red'",
+                                "type": "string",
+                                "order": 9
+                            }
+                        }
                     }
+                    
                 }
             }
         }

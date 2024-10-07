@@ -8,7 +8,6 @@
 export type Title = string;
 export type Subtitle = string;
 export type HeaderFontSize = string;
-export type HeaderBackgroundColor = string;
 export type RowHeight = string;
 /**
  * You can describe the border in this way: ''1px solid red''
@@ -16,54 +15,63 @@ export type RowHeight = string;
 export type RowBorder = string;
 export type HeaderLabel = string;
 export type DataType = "state" | "string" | "number" | "boolean" | "button" | "image";
+export type Values = string[];
 /**
  * Number of digits after the decimal point.
  */
 export type NumberPrecision = number;
+/**
+ * Applicable for datatype 'state' fields only. Describe the State Map as an alternating list like this: "'ONLINE': 'green', 'DISCONNECTED', 'red'"
+ */
+export type StateMap = string;
 export type ColumnWidth = number;
 export type FontSize = string;
 /**
  * eg. 800 for bold and 100 for light font.
  */
 export type FontWeight = string;
-export type FontColor = string;
 /**
  * You can describe the border in this way: '1px solid red'
  */
 export type CellBorder = string;
 /**
- * Applicable for datatype 'state' fields only. Describe the State Map as an alternating list like this: "'ONLINE': 'green', 'DISCONNECTED', 'red'"
+ * Add columns and define how they should be displayed.
  */
-export type StateMap = string;
-export type Values = string[];
-/**
- * Choose the columns and define how they should be displayed.
- */
-export type ColumnDefinition = {
-  header: HeaderLabel;
+export type ColumnDefinitions = {
+  header?: HeaderLabel;
   type?: DataType;
+  values?: Values;
+  styling?: Styling;
+  [k: string]: unknown;
+}[];
+
+export interface InputData {
+  title?: Title;
+  subTitle?: Subtitle;
+  styling?: TableStyling;
+  columns?: ColumnDefinitions;
+  [k: string]: unknown;
+}
+export interface TableStyling {
+  headerFontSize?: HeaderFontSize;
+  headerBackground?: HeaderBackgroundColor;
+  rowHeight?: RowHeight;
+  rowBorder?: RowBorder;
+  [k: string]: unknown;
+}
+export interface HeaderBackgroundColor {
+  [k: string]: unknown;
+}
+export interface Styling {
   precision?: NumberPrecision;
+  stateMap?: StateMap;
   width?: ColumnWidth;
   fontSize?: FontSize;
   fontWeight?: FontWeight;
   color?: FontColor;
   border?: CellBorder;
-  stateMap?: StateMap;
-  values?: Values;
-  [k: string]: unknown;
-}[];
-
-export interface TableChartConfiguration {
-  settings?: TableSettings;
-  columns?: ColumnDefinition;
   [k: string]: unknown;
 }
-export interface TableSettings {
-  title?: Title;
-  subTitle?: Subtitle;
-  headerFontSize?: HeaderFontSize;
-  headerBackground?: HeaderBackgroundColor;
-  rowHeight?: RowHeight;
-  rowBorder?: RowBorder;
+export interface FontColor {
   [k: string]: unknown;
 }

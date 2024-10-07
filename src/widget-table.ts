@@ -1,14 +1,14 @@
 import { html, css, LitElement } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
 import { property, state, customElement } from 'lit/decorators.js'
-import { TableChartConfiguration } from './definition-schema.js'
+import { InputData } from './definition-schema.js'
 
-type Column = Exclude<TableChartConfiguration['columns'], undefined>[number]
+type Column = Exclude<InputData['columns'], undefined>[number]
 
 @customElement('widget-table-versionplaceholder')
 export class WidgetTable extends LitElement {
     @property({ type: Object })
-    inputData?: TableChartConfiguration
+    inputData?: InputData
 
     @state()
     rows: any[] = []
@@ -60,7 +60,7 @@ export class WidgetTable extends LitElement {
 
     renderNumber(value: number, colDef: Column) {
         if (typeof value !== 'number' || isNaN(value)) return ''
-        return html`${value?.toFixed(colDef?.precision)}`
+        return html`${value?.toFixed(colDef?.styling?.precision)}`
     }
 
     renderBoolean(value: any, colDef: Column) {
@@ -68,7 +68,7 @@ export class WidgetTable extends LitElement {
     }
 
     renderState(value: any, colDef: Column) {
-        const _stateMap = colDef.stateMap?.split(',').map((d: string) => d.trim().replaceAll("'", ''))
+        const _stateMap = colDef.styling?.stateMap?.split(',').map((d: string) => d.trim().replaceAll("'", ''))
         const stateMap = _stateMap?.reduce((p: any, c: string, i: number, a: any[]) => {
             if (i % 2 === 0) p[c] = a[i + 1]
             return p
@@ -143,6 +143,7 @@ export class WidgetTable extends LitElement {
         .tableFixHead {
             overflow-y: auto;
             height: 100%;
+            border-radius: 6px;
         }
         .tableFixHead thead {
             position: sticky;
@@ -191,14 +192,14 @@ export class WidgetTable extends LitElement {
                     (col, i) => i,
                     (col, i) => {
                         return html`
-                            .column-${i} { width: ${col.width}; text-align: ${this.getTextAlign(col)};
-                            font-size: ${col.fontSize}; font-weight: ${col.fontWeight}; color: ${col.color};
-                            border: ${col.border}; height: ${this?.inputData?.settings?.rowHeight}; }
+                            .column-${i} { width: ${col.styling?.width}; text-align: ${this.getTextAlign(col)};
+                            font-size: ${col.styling?.fontSize}; font-weight: ${col.styling?.fontWeight}; color: ${col.styling?.color};
+                            border: ${col.styling?.border}; height: ${this?.inputData?.styling?.rowHeight}; }
                             .header-${i} { width: ${col.width}; text-align: ${this.getTextAlign(col)}; border:
-                            ${col.border}; } thead { font-size: ${this?.inputData?.settings?.headerFontSize};
-                            background: ${this?.inputData?.settings?.headerBackground}; } tr { height:
-                            ${this?.inputData?.settings?.rowHeight}; border-bottom:
-                            ${this?.inputData?.settings?.rowBorder ?? '1px solid #ddd'}; }
+                            ${col.border}; } thead { font-size: ${this?.inputData?.styling?.headerFontSize};
+                            background: ${this?.inputData?.styling?.headerBackground}; } tr { height:
+                            ${this?.inputData?.styling?.rowHeight}; border-bottom:
+                            ${this?.inputData?.styling?.rowBorder ?? '1px solid #ddd'}; }
                         `
                     }
                 )}
@@ -206,12 +207,8 @@ export class WidgetTable extends LitElement {
 
             <div class="wrapper">
                 <header>
-                    <h3 class="paging" ?active=${this.inputData?.settings?.title}>
-                        ${this.inputData?.settings?.title}
-                    </h3>
-                    <p class="paging" ?active=${this.inputData?.settings?.subTitle}>
-                        ${this.inputData?.settings?.subTitle}
-                    </p>
+                    <h3 class="paging" ?active=${this.inputData?.title}>${this.inputData?.title}</h3>
+                    <p class="paging" ?active=${this.inputData?.subTitle}>${this.inputData?.subTitle}</p>
                 </header>
                 <div class="tableFixHead">
                     <table>
