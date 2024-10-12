@@ -20,6 +20,7 @@
                 "headerFontSize": {
                     "title": "Header Font Size",
                     "order": 3,
+                    "dataDrivenDisabled": true,
                     "type": "string"
                 },
                 "headerBackground": {
@@ -31,12 +32,14 @@
                 "rowHeight": {
                     "title": "Row Height",
                     "order": 5,
+                    "dataDrivenDisabled": true,
                     "type": "string"
                 },
                 "rowBorder": {
                     "title": "Row Border",
                     "description": "You can describe the border in this way: ''1px solid red'' ",
                     "order": 6,
+                    "dataDrivenDisabled": true,
                     "type": "string"
                 }
             }
@@ -60,6 +63,7 @@
                         "title": "Data Type",
                         "enum": ["state", "string", "number", "boolean", "button", "image"],
                         "type": "string",
+                        "dataDrivenDisabled": true,
                         "order": 2
                     },
                     "values": {
@@ -81,17 +85,20 @@
                                 "title": "Number Precision",
                                 "description": "Number of digits after the decimal point.",
                                 "type": "number",
+                                "dataDrivenDisabled": true,
                                 "order": 3
                             },
                             "stateMap": {
                                 "title": "State Map",
                                 "description": "Applicable for datatype 'state' fields only. Describe the State Map as an alternating list like this: \"'ONLINE': 'green', 'DISCONNECTED', 'red'\"",
                                 "type": "string",
+                                "dataDrivenDisabled": true,
                                 "order": 4
                             },
                             "width": {
                                 "title": "Column Width",
                                 "type": "number",
+                                "dataDrivenDisabled": true,
                                 "order": 5
                             },
                             "fontSize": {
@@ -103,6 +110,7 @@
                                 "title": "Font Weight",
                                 "description": "eg. 800 for bold and 100 for light font.",
                                 "type": "string",
+                                "dataDrivenDisabled": true,
                                 "order": 7
                             },
                             "color": {
@@ -115,11 +123,11 @@
                                 "title": "Cell Border",
                                 "description": "You can describe the border in this way: '1px solid red'",
                                 "type": "string",
+                                "dataDrivenDisabled": true,
                                 "order": 9
                             }
                         }
                     }
-                    
                 }
             }
         }
