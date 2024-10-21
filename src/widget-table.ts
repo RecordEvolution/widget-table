@@ -68,7 +68,9 @@ export class WidgetTable extends LitElement {
     }
 
     renderState(value: any, colDef: Column) {
-        const _stateMap = colDef.styling?.stateMap?.split(',').map((d: string) => d.trim().replaceAll("'", ''))
+        const _stateMap = colDef.styling?.stateMap
+            ?.split(',')
+            .map((d: string) => d.trim().replaceAll("'", ''))
         const stateMap = _stateMap?.reduce((p: any, c: string, i: number, a: any[]) => {
             if (i % 2 === 0) p[c] = a[i + 1]
             return p
@@ -142,7 +144,6 @@ export class WidgetTable extends LitElement {
 
         .tableFixHead {
             overflow-y: auto;
-            height: 100%;
             border-radius: 6px;
         }
         .tableFixHead thead {
@@ -182,6 +183,17 @@ export class WidgetTable extends LitElement {
         th {
             color: var(--re-text-color, #000) !important;
         }
+
+        .no-data {
+            font-size: 20px;
+            color: var(--re-text-color, #000);
+            display: flex;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
     `
 
     render() {
@@ -192,9 +204,10 @@ export class WidgetTable extends LitElement {
                     (col, i) => i,
                     (col, i) => {
                         return html`
-                            .column-${i} { width: ${col.styling?.width}; text-align: ${this.getTextAlign(col)};
-                            font-size: ${col.styling?.fontSize}; font-weight: ${col.styling?.fontWeight}; color: ${col.styling?.color};
-                            border: ${col.styling?.border}; height: ${this?.inputData?.styling?.rowHeight}; }
+                            .column-${i} { width: ${col.styling?.width}; text-align:
+                            ${this.getTextAlign(col)}; font-size: ${col.styling?.fontSize}; font-weight:
+                            ${col.styling?.fontWeight}; color: ${col.styling?.color}; border:
+                            ${col.styling?.border}; height: ${this?.inputData?.styling?.rowHeight}; }
                             .header-${i} { width: ${col.width}; text-align: ${this.getTextAlign(col)}; border:
                             ${col.border}; } thead { font-size: ${this?.inputData?.styling?.headerFontSize};
                             background: ${this?.inputData?.styling?.headerBackground}; } tr { height:
@@ -210,7 +223,7 @@ export class WidgetTable extends LitElement {
                     <h3 class="paging" ?active=${this.inputData?.title}>${this.inputData?.title}</h3>
                     <p class="paging" ?active=${this.inputData?.subTitle}>${this.inputData?.subTitle}</p>
                 </header>
-                <div class="tableFixHead">
+                <div class="tableFixHead" style="${this.rows?.length ? 'height: 100%' : ''}">
                     <table>
                         <thead>
                             <tr>
@@ -223,7 +236,7 @@ export class WidgetTable extends LitElement {
                                 )}
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="paging" ?active=${this.rows?.length}>
                             ${repeat(
                                 this.rows.reverse() ?? [],
                                 (row, idx) => idx,
@@ -242,6 +255,7 @@ export class WidgetTable extends LitElement {
                         </tbody>
                     </table>
                 </div>
+                <div class="paging no-data" ?active=${!this.rows?.length}>No Data</div>
             </div>
         `
     }
