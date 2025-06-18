@@ -1,7 +1,6 @@
 {
     "styling": {
         "headerFontSize": "16px",
-        "headerBackground": "#fcfcfc",
         "rowHeight": "40px"
     },
     "columns": [
@@ -20,8 +19,7 @@
             "values": ["Royal Fortune", "Mayflower", "Flying King", "Snap Dragon", "Schonerbrigg Asgard"],
             "styling": {
                 "width": "120px",
-                "fontSize": "16px",
-                "color": "grey"
+                "fontSize": "16px"
             }
         },
         {

@@ -4,14 +4,24 @@ import { property, state, customElement } from 'lit/decorators.js'
 import { InputData } from './definition-schema.js'
 
 type Column = Exclude<InputData['columns'], undefined>[number]
-
+type Theme = {
+    theme_name: string
+    theme_object: any
+}
 @customElement('widget-table-versionplaceholder')
 export class WidgetTable extends LitElement {
     @property({ type: Object })
     inputData?: InputData
 
+    @property({ type: Object })
+    theme?: Theme
+
     @state()
     rows: any[] = []
+
+    @state() private themeBgColor?: string
+    @state() private themeTitleColor?: string
+    @state() private themeSubtitleColor?: string
 
     version: string = 'versionplaceholder'
 
@@ -19,6 +29,16 @@ export class WidgetTable extends LitElement {
         if (changedProperties.has('inputData')) {
             this.transformInputData()
         }
+
+        if (changedProperties.has('theme')) {
+            const cssTextColor = getComputedStyle(this).getPropertyValue('--re-text-color').trim()
+            const cssBgColor = getComputedStyle(this).getPropertyValue('--re-background-color').trim()
+            this.themeBgColor = cssBgColor || this.theme?.theme_object?.backgroundColor
+            this.themeTitleColor = cssTextColor || this.theme?.theme_object?.title?.textStyle?.color
+            this.themeSubtitleColor =
+                cssTextColor || this.theme?.theme_object?.title?.subtextStyle?.color || this.themeTitleColor
+        }
+
         super.update(changedProperties)
     }
 
@@ -129,7 +149,6 @@ export class WidgetTable extends LitElement {
             white-space: nowrap;
             padding: 16px 0px 0px 16px;
             box-sizing: border-box;
-            color: var(--re-text-color, #000);
         }
         p {
             margin: 10px 0 16px 0;
@@ -139,7 +158,6 @@ export class WidgetTable extends LitElement {
             white-space: nowrap;
             padding-left: 16px;
             box-sizing: border-box;
-            color: var(--re-text-color, #000);
         }
 
         .tableFixHead {
@@ -174,19 +192,8 @@ export class WidgetTable extends LitElement {
             object-fit: contain;
         }
 
-        md-filled-tonal-button {
-            --md-filled-tonal-button-container-color: #ddd;
-            --md-filled-tonal-button-label-text-font: sans-serif;
-            height: 24px;
-        }
-
-        th {
-            color: var(--re-text-color, #000) !important;
-        }
-
         .no-data {
             font-size: 20px;
-            color: var(--re-text-color, #000);
             display: flex;
             height: 100%;
             width: 100%;
@@ -206,11 +213,12 @@ export class WidgetTable extends LitElement {
                         return html`
                             .column-${i} { width: ${col.styling?.width}; text-align:
                             ${this.getTextAlign(col)}; font-size: ${col.styling?.fontSize}; font-weight:
-                            ${col.styling?.fontWeight}; color: ${col.styling?.color}; border:
-                            ${col.styling?.border}; height: ${this?.inputData?.styling?.rowHeight}; }
-                            .header-${i} { width: ${col.width}; text-align: ${this.getTextAlign(col)}; border:
-                            ${col.border}; } thead { font-size: ${this?.inputData?.styling?.headerFontSize};
-                            background: ${this?.inputData?.styling?.headerBackground}; } tr { height:
+                            ${col.styling?.fontWeight}; color:
+                            ${col.styling?.color || this.themeSubtitleColor}; border: ${col.styling?.border};
+                            height: ${this?.inputData?.styling?.rowHeight}; } .header-${i} { width:
+                            ${col.width}; text-align: ${this.getTextAlign(col)}; border: ${col.border}; }
+                            thead { font-size: ${this?.inputData?.styling?.headerFontSize}; background:
+                            ${this?.inputData?.styling?.headerBackground}; } tr { height:
                             ${this?.inputData?.styling?.rowHeight}; border-bottom:
                             ${this?.inputData?.styling?.rowBorder ?? '1px solid #ddd'}; }
                         `
@@ -218,10 +226,19 @@ export class WidgetTable extends LitElement {
                 )}
             </style>
 
-            <div class="wrapper">
+            <div
+                class="wrapper"
+                style="color: ${this.themeTitleColor}; background-color: ${this.themeBgColor}"
+            >
                 <header>
                     <h3 class="paging" ?active=${this.inputData?.title}>${this.inputData?.title}</h3>
-                    <p class="paging" ?active=${this.inputData?.subTitle}>${this.inputData?.subTitle}</p>
+                    <p
+                        class="paging"
+                        ?active=${this.inputData?.subTitle}
+                        style="color: ${this.themeSubtitleColor}"
+                    >
+                        ${this.inputData?.subTitle}
+                    </p>
                 </header>
                 <div class="tableFixHead" style="${this.rows?.length ? 'height: 100%' : ''}">
                     <table>
