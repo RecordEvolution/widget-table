@@ -71,6 +71,7 @@
                         "type": "array",
                         "order": 3,
                         "items": {
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "title": "Display Value",
