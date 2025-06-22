@@ -15,7 +15,13 @@ export type RowHeight = string;
 export type RowBorder = string;
 export type HeaderLabel = string;
 export type DataType = "state" | "string" | "number" | "boolean" | "button" | "image";
-export type Values = string[];
+export type DisplayValue = string;
+export type LinkURL = string;
+export type Values = {
+  value?: DisplayValue;
+  link?: LinkURL;
+  [k: string]: unknown;
+}[];
 /**
  * Number of digits after the decimal point.
  */

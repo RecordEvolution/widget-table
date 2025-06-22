@@ -1,7 +1,7 @@
 import { html, css, LitElement, PropertyValues } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
 import { property, state, customElement } from 'lit/decorators.js'
-import { InputData } from './definition-schema.js'
+import { InputData, Values } from './definition-schema.js'
 
 type Column = Exclude<InputData['columns'], undefined>[number]
 type Theme = {
@@ -17,7 +17,7 @@ export class WidgetTable extends LitElement {
     theme?: Theme
 
     @state()
-    rows: any[] = []
+    rows: Values[] = []
 
     @state() private themeBgColor?: string
     @state() private themeTitleColor?: string
@@ -63,26 +63,26 @@ export class WidgetTable extends LitElement {
         this.rows = rows
     }
 
-    renderCell(value: any, i: number) {
+    renderCell(cell: any, i: number) {
         const colDef = this?.inputData?.columns?.[i]
 
         switch (colDef?.type) {
             case 'string':
-                return this.renderString(value, colDef)
+                return this.renderString(cell.value, colDef)
             case 'number':
-                return this.renderNumber(value, colDef)
+                return this.renderNumber(cell.value, colDef)
             case 'boolean':
-                return this.renderBoolean(value, colDef)
+                return this.renderBoolean(cell.value, colDef)
             case 'state':
-                return this.renderState(value, colDef)
+                return this.renderState(cell.value, colDef)
             case 'button':
-                return this.renderButton(value, colDef)
+                return this.renderButton(cell, colDef)
             case 'image':
-                return this.renderImage(value, colDef)
+                return this.renderImage(cell, colDef)
         }
     }
 
-    renderString(value: any, colDef: Column) {
+    renderString(value: string, colDef: Column) {
         return html`${value}`
     }
 
@@ -106,12 +106,12 @@ export class WidgetTable extends LitElement {
         return html`<div class="statusbox" style="background-color: ${stateMap[value]}"></div>`
     }
 
-    renderButton(value: any, colDef: Column) {
-        return html`<a href="${value}" target="_blank">${colDef.header}</a>`
+    renderButton(cell: Values[number], colDef: Column) {
+        return html`<a href="${cell?.link ?? ''}" target="_blank">${cell.value ?? ''}</a>`
     }
 
-    renderImage(value: any, colDef: Column) {
-        return html`<img src="${value}" />`
+    renderImage(cell: Values[number], colDef: Column) {
+        return html`<a href="${cell?.link ?? ''}" target="_blank"><img src="${cell.value ?? ''}" /></a>`
     }
 
     getTextAlign(colDef: Column) {

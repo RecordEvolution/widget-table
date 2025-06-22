@@ -71,7 +71,20 @@
                         "type": "array",
                         "order": 3,
                         "items": {
-                            "type": "string"
+                            "properties": {
+                                "value": {
+                                    "title": "Display Value",
+                                    "type": "string",
+                                    "required": true,
+                                    "order": 1
+                                },
+                                "link": {
+                                    "title": "Link URL",
+                                    "type": "string",
+                                    "required": false,
+                                    "order": 2
+                                }
+                            }
                         }
                     },
 
