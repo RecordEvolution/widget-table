@@ -218,17 +218,29 @@ export class WidgetTable extends LitElement {
                     this.inputData?.columns ?? [],
                     (col, i) => i,
                     (col, i) => {
-                        return html`
-                            .column-${i} { width: ${col.styling?.width}; text-align:
-                            ${this.getTextAlign(col)}; font-size: ${col.styling?.fontSize}; font-weight:
-                            ${col.styling?.fontWeight}; color:
-                            ${col.styling?.color || this.themeSubtitleColor}; border: ${col.styling?.border};
-                            height: ${this?.inputData?.styling?.rowHeight}; } .header-${i} { width:
-                            ${col.width}; text-align: ${this.getTextAlign(col)}; border: ${col.border}; }
-                            thead { font-size: ${this?.inputData?.styling?.headerFontSize}; background:
-                            ${this?.inputData?.styling?.headerBackground}; } tr { height:
-                            ${this?.inputData?.styling?.rowHeight}; border-bottom:
-                            ${this?.inputData?.styling?.rowBorder ?? '1px solid #ddd'}; }
+                        return `
+                            .column-${i} {
+                                width: ${col.styling?.width};
+                                text-align: ${this.getTextAlign(col)};
+                                font-size: ${col.styling?.fontSize};
+                                font-weight: ${col.styling?.fontWeight};
+                                color: ${col.styling?.color || this.themeSubtitleColor};
+                                border: ${col.styling?.border};
+                                height: ${this?.inputData?.styling?.rowHeight};
+                            }
+                            .header-${i} {
+                                width: ${col.width};
+                                text-align: ${this.getTextAlign(col)};
+                                border: ${col.border};
+                            }
+                            thead {
+                                font-size: ${this?.inputData?.styling?.headerFontSize};
+                                background: ${this?.inputData?.styling?.headerBackground};
+                            }
+                            tr {
+                                height: ${this?.inputData?.styling?.rowHeight};
+                                border-bottom: ${this?.inputData?.styling?.rowBorder ?? '1px solid #ddd'};
+                            }
                         `
                     }
                 )}
@@ -254,7 +266,7 @@ export class WidgetTable extends LitElement {
                             <tr>
                                 ${repeat(
                                     this.inputData?.columns ?? [],
-                                    (col) => col,
+                                    (col, i) => i,
                                     (col, i) => {
                                         return html` <th class="header-${i}">${col.header}</th> `
                                     }
@@ -269,7 +281,7 @@ export class WidgetTable extends LitElement {
                                     return html` <tr>
                                         ${repeat(
                                             row,
-                                            (c) => c,
+                                            (c, idx) => idx,
                                             (cell, i) => html`
                                                 <td class="column-${i}">${this.renderCell(cell, i)}</td>
                                             `

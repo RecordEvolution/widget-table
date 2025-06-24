@@ -13,7 +13,7 @@ export default {
     output: {
         dir: './dist',
         sourcemap: true,
-        name: 'widget_value_bundle',
+        name: 'widget_table_bundle',
         banner: `/* @license Copyright (c) 2023 Record Evolution GmbH. All rights reserved.*/`,
         format: 'esm'
     },
