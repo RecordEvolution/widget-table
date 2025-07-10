@@ -1,4 +1,4 @@
-import { html, css, LitElement, PropertyValues } from 'lit'
+import { html, css, LitElement, PropertyValues, nothing } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
 import { property, state, customElement } from 'lit/decorators.js'
 import { InputData, Values } from './definition-schema.js'
@@ -54,12 +54,17 @@ export class WidgetTable extends LitElement {
         if (!this?.inputData?.columns?.length) return
 
         const rows: any[][] = []
-        this.inputData.columns.forEach((col, i) => {
-            col.values?.forEach((v, j) => {
-                if (rows.length <= j) rows.push([])
-                rows[j].push(v)
-            })
-        })
+        const cols = this.inputData.columns.map((col) => col?.values ?? [])
+        const maxLength = Math.max(...cols.map((vals) => vals?.length ?? 0))
+
+        for (let r = 0; r < maxLength; r++) {
+            rows.push([])
+            for (let c = 0; c < cols.length; c++) {
+                const value = cols?.[c]?.[r]
+                rows[r].push(value ?? {})
+            }
+        }
+
         this.rows = rows
     }
 
@@ -111,6 +116,7 @@ export class WidgetTable extends LitElement {
     }
 
     renderImage(cell: Values[number], colDef: Column) {
+        if (!cell?.value) return nothing
         return html`<a href="${cell?.link ?? ''}" target="_blank"><img src="${cell.value ?? ''}" /></a>`
     }
 

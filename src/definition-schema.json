@@ -60,7 +60,7 @@
                         "order": 1
                     },
                     "type": {
-                        "title": "Data Type",
+                        "title": "Column Type",
                         "enum": ["state", "string", "number", "boolean", "button", "image"],
                         "type": "string",
                         "dataDrivenDisabled": true,
