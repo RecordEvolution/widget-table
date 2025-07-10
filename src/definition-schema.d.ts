@@ -14,7 +14,7 @@ export type RowHeight = string;
  */
 export type RowBorder = string;
 export type HeaderLabel = string;
-export type DataType = "state" | "string" | "number" | "boolean" | "button" | "image";
+export type ColumnType = "state" | "string" | "number" | "boolean" | "button" | "image";
 export type DisplayValue = string;
 export type LinkURL = string;
 export type Values = {
@@ -45,7 +45,7 @@ export type CellBorder = string;
  */
 export type ColumnDefinitions = {
   header?: HeaderLabel;
-  type?: DataType;
+  type?: ColumnType;
   values?: Values;
   styling?: Styling;
   [k: string]: unknown;
