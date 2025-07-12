@@ -108,7 +108,7 @@ export class WidgetTable extends LitElement {
             if (i % 2 === 0) p[c] = a[i + 1]
             return p
         }, {})
-        return html`<div class="statusbox" style="background-color: ${stateMap[value]}"></div>`
+        return html`<div class="statusbox" style="background-color: ${stateMap[String(value)]}"></div>`
     }
 
     renderButton(cell: Values[number], colDef: Column) {
