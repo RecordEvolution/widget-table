@@ -1,7 +1,10 @@
 {
+    "horizontalOverflow": false,
     "styling": {
         "headerFontSize": "16px",
-        "rowHeight": "40px"
+        "cellPaddingHorizontal": "8px",
+        "cellPaddingVertical": "4px",
+        "columnSeparators": true
     },
     "columns": [
         {
@@ -16,7 +19,7 @@
             ],
             "styling": {
                 "stateMap": "'ONLINE', '#6e9a69', 'DISCONNECTED', '#e15656'",
-                "width": "50px"
+                "width": "80px"
             }
         },
         {
@@ -30,7 +33,6 @@
                 { "value": "Schonerbrigg Asgard" }
             ],
             "styling": {
-                "width": "120px",
                 "fontSize": "16px"
             }
         },
@@ -39,7 +41,7 @@
             "type": "number",
             "values": [{ "value": 80 }, { "value": 20 }, { "value": 30 }, { "value": 40 }, { "value": 50 }],
             "styling": {
-                "width": "120px",
+                "width": "220px",
                 "fontWeight": 100,
                 "precision": 2
             }
@@ -55,7 +57,7 @@
                 { "value": false }
             ],
             "styling": {
-                "width": "20px"
+                "width": "80px"
             }
         },
         {

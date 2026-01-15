@@ -7,12 +7,20 @@
 
 export type Title = string;
 export type Subtitle = string;
+export type EnableHorizontalOverflow = boolean;
 export type HeaderFontSize = string;
-export type RowHeight = string;
 /**
- * You can describe the border in this way: ''1px solid red''
+ * Display vertical lines between columns
  */
-export type RowBorder = string;
+export type ShowColumnSeparators = boolean;
+/**
+ * Horizontal padding inside cells (e.g. '8px' or '1rem')
+ */
+export type CellPaddingHorizontal = string;
+/**
+ * Vertical padding inside cells (e.g. '8px' or '1rem')
+ */
+export type CellPaddingVertical = string;
 export type HeaderLabel = string;
 export type ColumnType = "state" | "string" | "number" | "boolean" | "button" | "image";
 export type DisplayValue = string;
@@ -27,10 +35,10 @@ export type Values = {
  */
 export type NumberPrecision = number;
 /**
- * Applicable for datatype 'state' fields only. Describe the State Map as an alternating list like this: "'ONLINE': 'green', 'DISCONNECTED', 'red'"
+ * Describe the State Map as an alternating list like this: "'ONLINE': 'green', 'DISCONNECTED', 'red'"
  */
 export type StateMap = string;
-export type ColumnWidth = number;
+export type ColumnWidth = string;
 export type FontSize = string;
 /**
  * eg. 800 for bold and 100 for light font.
@@ -54,18 +62,16 @@ export type ColumnDefinitions = {
 export interface InputData {
   title?: Title;
   subTitle?: Subtitle;
+  horizontalOverflow?: EnableHorizontalOverflow;
   styling?: TableStyling;
   columns?: ColumnDefinitions;
   [k: string]: unknown;
 }
 export interface TableStyling {
   headerFontSize?: HeaderFontSize;
-  headerBackground?: HeaderBackgroundColor;
-  rowHeight?: RowHeight;
-  rowBorder?: RowBorder;
-  [k: string]: unknown;
-}
-export interface HeaderBackgroundColor {
+  columnSeparators?: ShowColumnSeparators;
+  cellPaddingHorizontal?: CellPaddingHorizontal;
+  cellPaddingVertical?: CellPaddingVertical;
   [k: string]: unknown;
 }
 export interface Styling {

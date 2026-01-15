@@ -12,9 +12,15 @@
             "order": 2,
             "type": "string"
         },
+        "horizontalOverflow": {
+            "title": "Enable Horizontal Overflow",
+            "order": 3,
+            "dataDrivenDisabled": true,
+            "type": "boolean"
+        },
         "styling": {
             "title": "Table Styling",
-            "order": 3,
+            "order": 4,
             "type": "object",
             "properties": {
                 "headerFontSize": {
@@ -23,22 +29,24 @@
                     "dataDrivenDisabled": true,
                     "type": "string"
                 },
-                "headerBackground": {
-                    "title": "Header Background Color",
+                "columnSeparators": {
+                    "title": "Show Column Separators",
+                    "description": "Display vertical lines between columns",
                     "order": 4,
-                    "type": "color",
-                    "color": true
+                    "dataDrivenDisabled": true,
+                    "type": "boolean"
                 },
-                "rowHeight": {
-                    "title": "Row Height",
-                    "order": 5,
+                "cellPaddingHorizontal": {
+                    "title": "Cell Padding Horizontal",
+                    "description": "Horizontal padding inside cells (e.g. '8px' or '1rem')",
+                    "order": 7,
                     "dataDrivenDisabled": true,
                     "type": "string"
                 },
-                "rowBorder": {
-                    "title": "Row Border",
-                    "description": "You can describe the border in this way: ''1px solid red'' ",
-                    "order": 6,
+                "cellPaddingVertical": {
+                    "title": "Cell Padding Vertical",
+                    "description": "Vertical padding inside cells (e.g. '8px' or '1rem')",
+                    "order": 8,
                     "dataDrivenDisabled": true,
                     "type": "string"
                 }
@@ -82,6 +90,10 @@
                                 "link": {
                                     "title": "Link URL",
                                     "type": "string",
+                                    "condition": {
+                                        "relativePath": "../../../type",
+                                        "showIfValueIn": ["image", "button"]
+                                    },
                                     "required": false,
                                     "order": 2
                                 }
@@ -99,19 +111,27 @@
                                 "title": "Number Precision",
                                 "description": "Number of digits after the decimal point.",
                                 "type": "number",
+                                "condition": {
+                                    "relativePath": "../../type",
+                                    "showIfValueIn": ["number"]
+                                },
                                 "dataDrivenDisabled": true,
                                 "order": 3
                             },
                             "stateMap": {
                                 "title": "State Map",
-                                "description": "Applicable for datatype 'state' fields only. Describe the State Map as an alternating list like this: \"'ONLINE': 'green', 'DISCONNECTED', 'red'\"",
+                                "description": "Describe the State Map as an alternating list like this: \"'ONLINE': 'green', 'DISCONNECTED', 'red'\"",
                                 "type": "string",
+                                "condition": {
+                                    "relativePath": "../../type",
+                                    "showIfValueIn": ["state"]
+                                },
                                 "dataDrivenDisabled": true,
                                 "order": 4
                             },
                             "width": {
                                 "title": "Column Width",
-                                "type": "number",
+                                "type": "string",
                                 "dataDrivenDisabled": true,
                                 "order": 5
                             },
