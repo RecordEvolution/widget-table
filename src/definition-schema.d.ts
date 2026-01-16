@@ -31,11 +31,11 @@ export type Values = {
   [k: string]: unknown;
 }[];
 /**
- * Format for parsing timestamps. If not provided, a numeric timestamp is expected in Unix epoch milliseconds (=JavaScript timestamp).
+ * Format for parsing timestamps in Unicode LDML standard (yyyy-MM-dd HH:mm:ss.SSS). If not provided, a numeric timestamp is expected in Unix epoch milliseconds (=JavaScript timestamp).
  */
 export type TimestampParseFormat = string;
 /**
- * Format for displaying timestamps. If not provided, ISO string format will be displayed.
+ * Format for displaying timestamps in Unicode LDML standard (yyyy-MM-dd HH:mm:ss.SSS). If not provided, ISO string format will be displayed.
  */
 export type TimestampDisplayFormat = string;
 /**
