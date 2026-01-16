@@ -102,6 +102,21 @@
             "styling": {
                 "width": "120px"
             }
+        },
+        {
+            "header": "Last Update",
+            "type": "timestamp",
+            "values": [
+                { "value": 1737043245123 },
+                { "value": 1736952000000 },
+                { "value": 1736865600000 },
+                { "value": 1736779200000 },
+                { "value": 1736692800000 }
+            ],
+            "styling": {
+                "timestampFormat": "yyyy-MM-dd HH:mm:ss.SSS",
+                "width": "220px"
+            }
         }
     ]
 }

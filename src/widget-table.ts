@@ -117,6 +117,8 @@ export class WidgetTable extends LitElement {
                 return this.renderButton(cell, colDef)
             case 'image':
                 return this.renderImage(cell, colDef)
+            case 'timestamp':
+                return this.renderTimestamp(cell?.value, colDef)
             default:
                 return html`${cell?.value ?? ''}`
         }
@@ -160,9 +162,85 @@ export class WidgetTable extends LitElement {
         return html`<a href="${cell?.link ?? ''}" target="_blank"><img src="${cell.value}" /></a>`
     }
 
+    renderTimestamp(value: any, colDef: Column) {
+        if (value === undefined || value === null || value === '') return ''
+
+        const parseFormat = colDef.styling?.timestampParseFormat
+        const displayFormat = colDef.styling?.timestampFormat
+
+        let date: Date
+
+        if (parseFormat) {
+            // Parse using custom format
+            date = this.parseTimestamp(String(value), parseFormat)
+        } else {
+            // Default: expect Unix epoch milliseconds
+            const timestamp = typeof value === 'number' ? value : parseInt(value, 10)
+            if (isNaN(timestamp)) return ''
+            date = new Date(timestamp)
+        }
+
+        if (isNaN(date.getTime())) return ''
+
+        if (displayFormat) {
+            return html`${this.formatTimestamp(date, displayFormat)}`
+        }
+        return html`${date.toISOString()}`
+    }
+
+    parseTimestamp(value: string, format: string): Date {
+        // Unicode LDML format tokens: yyyy, MM, dd, HH, mm, ss, SSS
+        // See: https://unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
+        const formatTokens: { [key: string]: { regex: string; setter: (d: Date, v: number) => void } } = {
+            yyyy: { regex: '(\\d{4})', setter: (d, v) => d.setFullYear(v) },
+            MM: { regex: '(\\d{2})', setter: (d, v) => d.setMonth(v - 1) },
+            dd: { regex: '(\\d{2})', setter: (d, v) => d.setDate(v) },
+            HH: { regex: '(\\d{2})', setter: (d, v) => d.setHours(v) },
+            mm: { regex: '(\\d{2})', setter: (d, v) => d.setMinutes(v) },
+            ss: { regex: '(\\d{2})', setter: (d, v) => d.setSeconds(v) },
+            SSS: { regex: '(\\d{3})', setter: (d, v) => d.setMilliseconds(v) }
+        }
+
+        let regexStr = format.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+        const tokens: string[] = []
+
+        for (const token of ['yyyy', 'SSS', 'MM', 'dd', 'HH', 'mm', 'ss']) {
+            if (regexStr.includes(token)) {
+                regexStr = regexStr.replace(token, formatTokens[token].regex)
+                tokens.push(token)
+            }
+        }
+
+        const match = value.match(new RegExp(`^${regexStr}$`))
+        if (!match) return new Date(NaN)
+
+        const date = new Date(0)
+        tokens.forEach((token, i) => {
+            formatTokens[token].setter(date, parseInt(match[i + 1], 10))
+        })
+
+        return date
+    }
+
+    formatTimestamp(date: Date, format: string): string {
+        const pad = (n: number, len = 2) => String(n).padStart(len, '0')
+
+        // Unicode LDML format tokens
+        // See: https://unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
+        return format
+            .replace('yyyy', String(date.getFullYear()))
+            .replace('MM', pad(date.getMonth() + 1))
+            .replace('dd', pad(date.getDate()))
+            .replace('HH', pad(date.getHours()))
+            .replace('mm', pad(date.getMinutes()))
+            .replace('ss', pad(date.getSeconds()))
+            .replace('SSS', pad(date.getMilliseconds(), 3))
+    }
+
     getTextAlign(colDef: Column) {
         switch (colDef.type) {
             case 'number':
+            case 'timestamp':
                 return 'end'
             case 'button':
             case 'string':

@@ -69,7 +69,7 @@
                     },
                     "type": {
                         "title": "Column Type",
-                        "enum": ["state", "string", "number", "boolean", "button", "image"],
+                        "enum": ["state", "string", "number", "boolean", "button", "image", "timestamp"],
                         "type": "string",
                         "dataDrivenDisabled": true,
                         "order": 2
@@ -107,6 +107,28 @@
                         "type": "object",
                         "order": 5,
                         "properties": {
+                            "timestampParseFormat": {
+                                "title": "Timestamp Parse Format",
+                                "description": "Format for parsing timestamps in Unicode LDML standard (yyyy-MM-dd HH:mm:ss.SSS). If not provided, a numeric timestamp is expected in Unix epoch milliseconds (=JavaScript timestamp).",
+                                "type": "string",
+                                "condition": {
+                                    "relativePath": "../../type",
+                                    "showIfValueIn": ["timestamp"]
+                                },
+                                "dataDrivenDisabled": true,
+                                "order": 3
+                            },
+                            "timestampFormat": {
+                                "title": "Timestamp Display Format",
+                                "description": "Format for displaying timestamps in Unicode LDML standard (yyyy-MM-dd HH:mm:ss.SSS). If not provided, ISO string format will be displayed.",
+                                "type": "string",
+                                "condition": {
+                                    "relativePath": "../../type",
+                                    "showIfValueIn": ["timestamp"]
+                                },
+                                "dataDrivenDisabled": true,
+                                "order": 3
+                            },
                             "precision": {
                                 "title": "Number Precision",
                                 "description": "Number of digits after the decimal point.",

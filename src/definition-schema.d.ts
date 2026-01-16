@@ -22,7 +22,7 @@ export type CellPaddingHorizontal = string;
  */
 export type CellPaddingVertical = string;
 export type HeaderLabel = string;
-export type ColumnType = "state" | "string" | "number" | "boolean" | "button" | "image";
+export type ColumnType = "state" | "string" | "number" | "boolean" | "button" | "image" | "timestamp";
 export type DisplayValue = string;
 export type LinkURL = string;
 export type Values = {
@@ -30,6 +30,14 @@ export type Values = {
   link?: LinkURL;
   [k: string]: unknown;
 }[];
+/**
+ * Format for parsing timestamps. If not provided, a numeric timestamp is expected in Unix epoch milliseconds (=JavaScript timestamp).
+ */
+export type TimestampParseFormat = string;
+/**
+ * Format for displaying timestamps. If not provided, ISO string format will be displayed.
+ */
+export type TimestampDisplayFormat = string;
 /**
  * Number of digits after the decimal point.
  */
@@ -75,6 +83,8 @@ export interface TableStyling {
   [k: string]: unknown;
 }
 export interface Styling {
+  timestampParseFormat?: TimestampParseFormat;
+  timestampFormat?: TimestampDisplayFormat;
   precision?: NumberPrecision;
   stateMap?: StateMap;
   width?: ColumnWidth;
