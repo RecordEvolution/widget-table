@@ -1,51 +1,57 @@
 {
     "title": "InputData",
+    "description": "A data table widget for displaying structured information in rows and columns. Use this widget to present lists, records, or any tabular data with customizable column types and formatting. Supports multiple column types: plain text, numbers with precision control, timestamps with format parsing, state indicators with color mapping, boolean values, clickable buttons with links, and images. Features include column width control, cell styling, horizontal overflow for wide tables, and header/cell separators. Ideal for device lists, event logs, inventory tables, status dashboards, or any scenario requiring organized data presentation in a grid format.",
     "type": "object",
     "properties": {
         "title": {
             "title": "Title",
+            "description": "The main heading displayed above the table. Use to describe the data being shown (e.g., 'Device Status', 'Recent Events', 'Inventory List').",
             "order": 1,
             "type": "string"
         },
         "subTitle": {
             "title": "Subtitle",
+            "description": "Secondary text displayed below the title. Use for additional context like filters applied, time range, or data source.",
             "order": 2,
             "type": "string"
         },
         "horizontalOverflow": {
             "title": "Enable Horizontal Overflow",
+            "description": "When enabled, table can scroll horizontally if columns exceed container width. Disable to force columns to fit within the available space. Enable for tables with many columns or fixed-width columns.",
             "order": 3,
             "dataDrivenDisabled": true,
             "type": "boolean"
         },
         "styling": {
             "title": "Table Styling",
+            "description": "Global styling options that apply to the entire table.",
             "order": 4,
             "type": "object",
             "properties": {
                 "headerFontSize": {
                     "title": "Header Font Size",
+                    "description": "CSS font size for column headers (e.g., '14px', '0.9rem'). Controls the size of text in the table header row.",
                     "order": 3,
                     "dataDrivenDisabled": true,
                     "type": "string"
                 },
                 "columnSeparators": {
                     "title": "Show Column Separators",
-                    "description": "Display vertical lines between columns",
+                    "description": "Display vertical lines between columns. Enable for clearer column distinction in dense tables, disable for a cleaner minimal look.",
                     "order": 4,
                     "dataDrivenDisabled": true,
                     "type": "boolean"
                 },
                 "cellPaddingHorizontal": {
                     "title": "Cell Padding Horizontal",
-                    "description": "Horizontal padding inside cells (e.g. '8px' or '1rem')",
+                    "description": "Left and right padding inside cells. CSS value like '8px', '1rem', or '0.5em'. Increase for more spacious cells, decrease for compact display.",
                     "order": 7,
                     "dataDrivenDisabled": true,
                     "type": "string"
                 },
                 "cellPaddingVertical": {
                     "title": "Cell Padding Vertical",
-                    "description": "Vertical padding inside cells (e.g. '8px' or '1rem')",
+                    "description": "Top and bottom padding inside cells. CSS value like '8px', '1rem', or '0.5em'. Affects row height and text breathing room.",
                     "order": 8,
                     "dataDrivenDisabled": true,
                     "type": "string"
@@ -54,7 +60,7 @@
         },
         "columns": {
             "title": "Column Definitions",
-            "description": "Add columns and define how they should be displayed.",
+            "description": "Configure each column's header, data type, values, and styling. The order of columns here determines their display order in the table. Each column binds its values to a data source.",
             "type": "array",
             "order": 4,
             "dataDrivenDisabled": true,
@@ -63,12 +69,14 @@
                 "properties": {
                     "header": {
                         "title": "Header Label",
+                        "description": "The text displayed in the column header. Should clearly identify the data (e.g., 'Device Name', 'Status', 'Last Updated').",
                         "type": "string",
                         "required": true,
                         "order": 1
                     },
                     "type": {
                         "title": "Column Type",
+                        "description": "Determines how cell values are rendered: 'string' for plain text, 'number' for numeric values with precision, 'boolean' for true/false display, 'state' for colored status indicators, 'timestamp' for formatted dates, 'button' for clickable actions, 'image' for displaying images.",
                         "enum": ["state", "string", "number", "boolean", "button", "image", "timestamp"],
                         "type": "string",
                         "dataDrivenDisabled": true,
@@ -76,6 +84,7 @@
                     },
                     "values": {
                         "title": "Values",
+                        "description": "The data values for this column. Each entry corresponds to a table row. Bind to a data source column to populate dynamically.",
                         "type": "array",
                         "order": 3,
                         "items": {
@@ -83,12 +92,14 @@
                             "properties": {
                                 "value": {
                                     "title": "Display Value",
+                                    "description": "The cell value to display. For images, this is the image URL. For buttons, this is the button label. For other types, this is the raw value to be formatted according to column type.",
                                     "type": "string",
                                     "required": true,
                                     "order": 1
                                 },
                                 "link": {
                                     "title": "Link URL",
+                                    "description": "Navigation URL for button and image columns. For buttons, clicking navigates to this URL. For images, clicking the image opens this link. Can be absolute URLs or relative paths for dashboard navigation.",
                                     "type": "string",
                                     "condition": {
                                         "relativePath": "../../../type",
@@ -103,13 +114,13 @@
 
                     "styling": {
                         "title": "Styling",
-                        "description": "",
+                        "description": "Visual styling options specific to this column. Settings depend on the column type.",
                         "type": "object",
                         "order": 5,
                         "properties": {
                             "timestampParseFormat": {
                                 "title": "Timestamp Parse Format",
-                                "description": "Format for parsing timestamps in Unicode LDML standard (yyyy-MM-dd HH:mm:ss.SSS). If not provided, a numeric timestamp is expected in Unix epoch milliseconds (=JavaScript timestamp).",
+                                "description": "Format string for parsing input timestamp values using Unicode LDML standard (e.g., 'yyyy-MM-dd HH:mm:ss.SSS'). Leave empty if timestamps are Unix epoch milliseconds (JavaScript timestamps).",
                                 "type": "string",
                                 "condition": {
                                     "relativePath": "../../type",
@@ -120,7 +131,7 @@
                             },
                             "timestampFormat": {
                                 "title": "Timestamp Display Format",
-                                "description": "Format for displaying timestamps in Unicode LDML standard (yyyy-MM-dd HH:mm:ss.SSS). If not provided, ISO string format will be displayed.",
+                                "description": "Format string for displaying timestamps using Unicode LDML standard. Examples: 'yyyy-MM-dd' for date only, 'HH:mm:ss' for time only, 'MMM d, yyyy h:mm a' for friendly format. Leave empty for ISO 8601 format.",
                                 "type": "string",
                                 "condition": {
                                     "relativePath": "../../type",
@@ -131,7 +142,7 @@
                             },
                             "precision": {
                                 "title": "Number Precision",
-                                "description": "Number of digits after the decimal point.",
+                                "description": "Number of decimal places for numeric columns. 0 for whole numbers, 1-3 for measurements. Only applies when column type is 'number'.",
                                 "type": "number",
                                 "condition": {
                                     "relativePath": "../../type",
@@ -142,7 +153,7 @@
                             },
                             "stateMap": {
                                 "title": "State Map",
-                                "description": "Describe the State Map as an alternating list like this: \"'ONLINE': 'green', 'DISCONNECTED', 'red'\"",
+                                "description": "Maps state values to colors for 'state' type columns. Format: alternating value-color pairs like \"'ONLINE': 'green', 'DISCONNECTED': 'red', 'PENDING': 'orange'\". Values not in the map use default styling.",
                                 "type": "string",
                                 "condition": {
                                     "relativePath": "../../type",
@@ -153,31 +164,34 @@
                             },
                             "width": {
                                 "title": "Column Width",
+                                "description": "Fixed width for this column. CSS value like '100px', '20%', or 'auto'. Use fixed widths for consistent layout or 'auto' to size based on content.",
                                 "type": "string",
                                 "dataDrivenDisabled": true,
                                 "order": 5
                             },
                             "fontSize": {
                                 "title": "Font Size",
+                                "description": "CSS font size for cells in this column (e.g., '14px', '0.9rem'). Overrides the default table font size for this column only.",
                                 "type": "string",
                                 "order": 6
                             },
                             "fontWeight": {
                                 "title": "Font Weight",
-                                "description": "eg. 800 for bold and 100 for light font.",
+                                "description": "Numeric font weight for this column. 100-300 for light, 400 for normal, 700-900 for bold. Use bold (700+) for important columns.",
                                 "type": "string",
                                 "dataDrivenDisabled": true,
                                 "order": 7
                             },
                             "color": {
                                 "title": "Font Color",
+                                "description": "Text color for cells in this column. Use the color picker or enter a CSS color value. Overrides theme color for this column.",
                                 "type": "color",
                                 "color": true,
                                 "order": 8
                             },
                             "border": {
                                 "title": "Cell Border",
-                                "description": "You can describe the border in this way: '1px solid red'",
+                                "description": "CSS border for cells in this column. Format: 'width style color' (e.g., '1px solid red', '2px dashed #333'). Useful for visual emphasis on specific columns.",
                                 "type": "string",
                                 "dataDrivenDisabled": true,
                                 "order": 9
