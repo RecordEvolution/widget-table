@@ -5,59 +5,92 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+/**
+ * The main heading displayed above the table. Use to describe the data being shown (e.g., 'Device Status', 'Recent Events', 'Inventory List').
+ */
 export type Title = string;
+/**
+ * Secondary text displayed below the title. Use for additional context like filters applied, time range, or data source.
+ */
 export type Subtitle = string;
+/**
+ * When enabled, table can scroll horizontally if columns exceed container width. Disable to force columns to fit within the available space. Enable for tables with many columns or fixed-width columns.
+ */
 export type EnableHorizontalOverflow = boolean;
+/**
+ * CSS font size for column headers (e.g., '14px', '0.9rem'). Controls the size of text in the table header row.
+ */
 export type HeaderFontSize = string;
 /**
- * Display vertical lines between columns
+ * Display vertical lines between columns. Enable for clearer column distinction in dense tables, disable for a cleaner minimal look.
  */
 export type ShowColumnSeparators = boolean;
 /**
- * Horizontal padding inside cells (e.g. '8px' or '1rem')
+ * Left and right padding inside cells. CSS value like '8px', '1rem', or '0.5em'. Increase for more spacious cells, decrease for compact display.
  */
 export type CellPaddingHorizontal = string;
 /**
- * Vertical padding inside cells (e.g. '8px' or '1rem')
+ * Top and bottom padding inside cells. CSS value like '8px', '1rem', or '0.5em'. Affects row height and text breathing room.
  */
 export type CellPaddingVertical = string;
+/**
+ * The text displayed in the column header. Should clearly identify the data (e.g., 'Device Name', 'Status', 'Last Updated').
+ */
 export type HeaderLabel = string;
+/**
+ * Determines how cell values are rendered: 'string' for plain text, 'number' for numeric values with precision, 'boolean' for true/false display, 'state' for colored status indicators, 'timestamp' for formatted dates, 'button' for clickable actions, 'image' for displaying images.
+ */
 export type ColumnType = "state" | "string" | "number" | "boolean" | "button" | "image" | "timestamp";
+/**
+ * The cell value to display. For images, this is the image URL. For buttons, this is the button label. For other types, this is the raw value to be formatted according to column type.
+ */
 export type DisplayValue = string;
+/**
+ * Navigation URL for button and image columns. For buttons, clicking navigates to this URL. For images, clicking the image opens this link. Can be absolute URLs or relative paths for dashboard navigation.
+ */
 export type LinkURL = string;
+/**
+ * The data values for this column. Each entry corresponds to a table row. Bind to a data source column to populate dynamically.
+ */
 export type Values = {
   value?: DisplayValue;
   link?: LinkURL;
   [k: string]: unknown;
 }[];
 /**
- * Format for parsing timestamps in Unicode LDML standard (yyyy-MM-dd HH:mm:ss.SSS). If not provided, a numeric timestamp is expected in Unix epoch milliseconds (=JavaScript timestamp).
+ * Format string for parsing input timestamp values using Unicode LDML standard (e.g., 'yyyy-MM-dd HH:mm:ss.SSS'). Leave empty if timestamps are Unix epoch milliseconds (JavaScript timestamps).
  */
 export type TimestampParseFormat = string;
 /**
- * Format for displaying timestamps in Unicode LDML standard (yyyy-MM-dd HH:mm:ss.SSS). If not provided, ISO string format will be displayed.
+ * Format string for displaying timestamps using Unicode LDML standard. Examples: 'yyyy-MM-dd' for date only, 'HH:mm:ss' for time only, 'MMM d, yyyy h:mm a' for friendly format. Leave empty for ISO 8601 format.
  */
 export type TimestampDisplayFormat = string;
 /**
- * Number of digits after the decimal point.
+ * Number of decimal places for numeric columns. 0 for whole numbers, 1-3 for measurements. Only applies when column type is 'number'.
  */
 export type NumberPrecision = number;
 /**
- * Describe the State Map as an alternating list like this: "'ONLINE': 'green', 'DISCONNECTED', 'red'"
+ * Maps state values to colors for 'state' type columns. Format: alternating value-color pairs like "'ONLINE': 'green', 'DISCONNECTED': 'red', 'PENDING': 'orange'". Values not in the map use default styling.
  */
 export type StateMap = string;
+/**
+ * Fixed width for this column. CSS value like '100px', '20%', or 'auto'. Use fixed widths for consistent layout or 'auto' to size based on content.
+ */
 export type ColumnWidth = string;
+/**
+ * CSS font size for cells in this column (e.g., '14px', '0.9rem'). Overrides the default table font size for this column only.
+ */
 export type FontSize = string;
 /**
- * eg. 800 for bold and 100 for light font.
+ * Numeric font weight for this column. 100-300 for light, 400 for normal, 700-900 for bold. Use bold (700+) for important columns.
  */
 export type FontWeight = string;
 /**
- * You can describe the border in this way: '1px solid red'
+ * CSS border for cells in this column. Format: 'width style color' (e.g., '1px solid red', '2px dashed #333'). Useful for visual emphasis on specific columns.
  */
 export type CellBorder = string;
 /**
- * Add columns and define how they should be displayed.
+ * Configure each column's header, data type, values, and styling. The order of columns here determines their display order in the table. Each column binds its values to a data source.
  */
 export type ColumnDefinitions = {
   header?: HeaderLabel;
@@ -67,6 +100,9 @@ export type ColumnDefinitions = {
   [k: string]: unknown;
 }[];
 
+/**
+ * A data table widget for displaying structured information in rows and columns. Use this widget to present lists, records, or any tabular data with customizable column types and formatting. Supports multiple column types: plain text, numbers with precision control, timestamps with format parsing, state indicators with color mapping, boolean values, clickable buttons with links, and images. Features include column width control, cell styling, horizontal overflow for wide tables, and header/cell separators. Ideal for device lists, event logs, inventory tables, status dashboards, or any scenario requiring organized data presentation in a grid format.
+ */
 export interface InputData {
   title?: Title;
   subTitle?: Subtitle;
@@ -75,6 +111,9 @@ export interface InputData {
   columns?: ColumnDefinitions;
   [k: string]: unknown;
 }
+/**
+ * Global styling options that apply to the entire table.
+ */
 export interface TableStyling {
   headerFontSize?: HeaderFontSize;
   columnSeparators?: ShowColumnSeparators;
@@ -82,6 +121,9 @@ export interface TableStyling {
   cellPaddingVertical?: CellPaddingVertical;
   [k: string]: unknown;
 }
+/**
+ * Visual styling options specific to this column. Settings depend on the column type.
+ */
 export interface Styling {
   timestampParseFormat?: TimestampParseFormat;
   timestampFormat?: TimestampDisplayFormat;
@@ -94,6 +136,9 @@ export interface Styling {
   border?: CellBorder;
   [k: string]: unknown;
 }
+/**
+ * Text color for cells in this column. Use the color picker or enter a CSS color value. Overrides theme color for this column.
+ */
 export interface FontColor {
   [k: string]: unknown;
 }
