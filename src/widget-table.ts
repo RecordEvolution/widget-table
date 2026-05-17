@@ -97,7 +97,7 @@ export class WidgetTable extends LitElement {
             rows.push(row)
         }
 
-        this.rows = rows.reverse()
+        this.rows = rows
     }
 
     renderCell(cell: Values[number], colIndex: number) {
