@@ -346,6 +346,11 @@ export class WidgetTable extends LitElement {
             min-height: 0;
             min-width: 0;
             overflow: hidden;
+            /* Derive scrollbar colors from the (inherited) text color so they
+               follow custom styles and themes — e.g. light thumb on dark bg.
+               Inherits into vaadin-grid's shadow DOM for browsers that honor it. */
+            scrollbar-width: thin;
+            scrollbar-color: color-mix(in srgb, currentColor 35%, transparent) transparent;
         }
 
         .grid-container.overflow {
@@ -354,6 +359,25 @@ export class WidgetTable extends LitElement {
 
         .grid-container.overflow vaadin-grid {
             min-width: max-content;
+        }
+
+        /* WebKit/Blink fallback for browsers without scrollbar-color support. */
+        .grid-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .grid-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .grid-container::-webkit-scrollbar-thumb {
+            background-color: color-mix(in srgb, currentColor 35%, transparent);
+            border-radius: 4px;
+        }
+
+        .grid-container::-webkit-scrollbar-thumb:hover {
+            background-color: color-mix(in srgb, currentColor 55%, transparent);
         }
 
         .statusbox {
