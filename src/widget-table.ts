@@ -100,6 +100,23 @@ export class WidgetTable extends LitElement {
         this.rows = rows
     }
 
+    /**
+     * A cell is empty when the data source has no value for it. Empty is a
+     * legitimate value (e.g. a `detail` column that is only filled for error
+     * rows), not a reason to skip the themed cell markup.
+     */
+    isEmptyValue(value: unknown) {
+        return value === undefined || value === null || value === ''
+    }
+
+    /**
+     * Neutral stand-in for an empty cell. Colored via `currentColor` so it
+     * follows the column/theme text color instead of a fixed default.
+     */
+    renderEmptyValue() {
+        return html`<span class="empty-value">–</span>`
+    }
+
     renderCell(cell: Values[number], colIndex: number) {
         const colDef = this?.inputData?.columns?.[colIndex]
         if (!colDef) return nothing
@@ -120,50 +137,82 @@ export class WidgetTable extends LitElement {
             case 'timestamp':
                 return this.renderTimestamp(cell?.value, colDef)
             default:
-                return html`${cell?.value ?? ''}`
+                return this.isEmptyValue(cell?.value) ? this.renderEmptyValue() : html`${cell?.value}`
         }
     }
 
     renderString(value: string | undefined, colDef: Column) {
-        return html`${value ?? ''}`
+        if (this.isEmptyValue(value)) return this.renderEmptyValue()
+        return html`${value}`
     }
 
     renderNumber(value: any, colDef: Column) {
+        if (this.isEmptyValue(value)) return this.renderEmptyValue()
         const num = typeof value === 'number' ? value : parseFloat(value)
-        if (isNaN(num)) return ''
+        if (isNaN(num)) return this.renderEmptyValue()
         const precision = colDef?.styling?.precision ?? 0
         return html`${num.toFixed(precision)}`
     }
 
     renderBoolean(value: any, colDef: Column) {
-        return value ? '✓' : '-'
+        if (this.isEmptyValue(value)) return this.renderEmptyValue()
+        // Values arrive from the data source as strings, so 'false'/'0'/'no'
+        // must not be treated as truthy.
+        const falsy = ['false', '0', 'no', 'off']
+        const isTrue = typeof value === 'string' ? !falsy.includes(value.trim().toLowerCase()) : !!value
+        return html`${isTrue ? '✓' : '-'}`
+    }
+
+    /**
+     * Accepts both the documented `'ONLINE': 'green', 'FAILED': 'red'` form and
+     * the flat `'ONLINE', 'green', 'FAILED', 'red'` pair list. Splitting on the
+     * colon as well as the comma is what makes the documented form work — without
+     * it every value stays unmapped and the whole column renders as one flat
+     * fallback color.
+     */
+    parseStateMap(stateMap?: string): { [key: string]: string } {
+        const tokens =
+            stateMap
+                ?.split(/[,:]/)
+                .map((token: string) =>
+                    token
+                        .trim()
+                        .replace(/^['"]|['"]$/g, '')
+                        .trim()
+                )
+                .filter((token: string) => token !== '') ?? []
+
+        const map: { [key: string]: string } = {}
+        for (let i = 0; i + 1 < tokens.length; i += 2) {
+            map[tokens[i]] = tokens[i + 1]
+        }
+        return map
     }
 
     renderState(value: any, colDef: Column) {
-        const _stateMap = colDef.styling?.stateMap
-            ?.split(',')
-            .map((d: string) => d.trim().replaceAll("'", ''))
-        const stateMap = _stateMap?.reduce((p: any, c: string, i: number, a: any[]) => {
-            if (i % 2 === 0) p[c] = a[i + 1]
-            return p
-        }, {})
-        return html`<div
-            class="statusbox"
-            style="background-color: ${stateMap?.[String(value)] ?? '#ccc'}"
-        ></div>`
+        if (this.isEmptyValue(value)) return this.renderEmptyValue()
+
+        const stateMap = this.parseStateMap(colDef.styling?.stateMap)
+        const color = stateMap[String(value)]
+        // Unmapped states fall back to a tint of the text color (see
+        // `.statusbox-unmapped`) — a fixed grey would ignore the dashboard theme.
+        return color
+            ? html`<div class="statusbox" style="background-color: ${color}"></div>`
+            : html`<div class="statusbox statusbox-unmapped"></div>`
     }
 
     renderButton(cell: Values[number], colDef: Column) {
-        return html`<a href="${cell?.link ?? ''}" target="_blank">${cell?.value ?? ''}</a>`
+        if (this.isEmptyValue(cell?.value)) return this.renderEmptyValue()
+        return html`<a href="${cell?.link ?? ''}" target="_blank">${cell?.value}</a>`
     }
 
     renderImage(cell: Values[number], colDef: Column) {
-        if (!cell?.value) return nothing
+        if (this.isEmptyValue(cell?.value)) return this.renderEmptyValue()
         return html`<a href="${cell?.link ?? ''}" target="_blank"><img src="${cell.value}" /></a>`
     }
 
     renderTimestamp(value: any, colDef: Column) {
-        if (value === undefined || value === null || value === '') return ''
+        if (this.isEmptyValue(value)) return this.renderEmptyValue()
 
         const parseFormat = colDef.styling?.timestampParseFormat
         const displayFormat = colDef.styling?.timestampFormat
@@ -176,11 +225,11 @@ export class WidgetTable extends LitElement {
         } else {
             // Default: expect Unix epoch milliseconds
             const timestamp = typeof value === 'number' ? value : parseInt(value, 10)
-            if (isNaN(timestamp)) return ''
+            if (isNaN(timestamp)) return this.renderEmptyValue()
             date = new Date(timestamp)
         }
 
-        if (isNaN(date.getTime())) return ''
+        if (isNaN(date.getTime())) return this.renderEmptyValue()
 
         if (displayFormat) {
             return html`${this.formatTimestamp(date, displayFormat)}`
@@ -302,6 +351,11 @@ export class WidgetTable extends LitElement {
             --vaadin-grid-column-border-width: var(--grid-column-border-width, 0);
             --vaadin-grid-border-color: var(--grid-border-color, rgba(128, 128, 128, 0.3));
             background: var(--grid-bg-color, transparent);
+            /* Vaadin paints rows with --vaadin-background-color (opaque white)
+               by default, which shows through wherever a cell is transparent.
+               Follow the dashboard style instead of the component default. */
+            --vaadin-grid-row-background-color: var(--grid-bg-color, transparent);
+            --vaadin-background-color: var(--grid-bg-color, transparent);
         }
 
         vaadin-grid::part(cell) {
@@ -384,6 +438,18 @@ export class WidgetTable extends LitElement {
             width: 24px;
             height: 12px;
             border-radius: 6px;
+        }
+
+        /* A state that the stateMap does not cover — tint the inherited text
+           color so the swatch follows the dashboard theme. */
+        .statusbox-unmapped {
+            background-color: color-mix(in srgb, currentColor 25%, transparent);
+        }
+
+        /* Placeholder for cells the data source left empty. Derived from the
+           cell's own color so it is muted in both light and dark themes. */
+        .empty-value {
+            opacity: 0.45;
         }
 
         img {
