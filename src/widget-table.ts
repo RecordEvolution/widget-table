@@ -2,13 +2,13 @@ import { html, css, LitElement, PropertyValues, nothing } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { property, state, customElement } from 'lit/decorators.js'
-import { InputData, Values } from './definition-schema.js'
+import { TableConfiguration, Values } from './definition-schema.js'
 
 import '@vaadin/grid'
 import '@vaadin/grid/vaadin-grid-sort-column.js'
 import { columnBodyRenderer } from '@vaadin/grid/lit.js'
 
-type Column = Exclude<InputData['columns'], undefined>[number]
+type Column = Exclude<TableConfiguration['columns'], undefined>[number]
 type RowData = { [key: string]: Values[number] }
 type Theme = {
     theme_name: string
@@ -17,7 +17,7 @@ type Theme = {
 @customElement('widget-table-versionplaceholder')
 export class WidgetTable extends LitElement {
     @property({ type: Object })
-    inputData?: InputData
+    inputData?: TableConfiguration
 
     @property({ type: Object })
     theme?: Theme

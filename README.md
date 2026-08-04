@@ -49,10 +49,10 @@ table.inputData = {
 }
 ```
 
-## InputData Interface
+## TableConfiguration Interface
 
 ```ts
-interface InputData {
+interface TableConfiguration {
     title?: string
     subTitle?: string
     horizontalOverflow?: boolean

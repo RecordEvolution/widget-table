@@ -1,6 +1,21 @@
 {
-    "title": "InputData",
+    "title": "Table Configuration",
     "description": "A data table widget for displaying structured information in rows and columns. Use this widget to present lists, records, or any tabular data with customizable column types and formatting. Supports multiple column types: plain text, numbers with precision control, timestamps with format parsing, state indicators with color mapping, boolean values, clickable buttons with links, and images. Features include column width control, cell styling, horizontal overflow for wide tables, and header/cell separators. Ideal for device lists, event logs, inventory tables, status dashboards, or any scenario requiring organized data presentation in a grid format.",
+    "aiSelection": {
+        "dataShape": "Rows and columns. Each columns[] entry binds one column of the source data and declares how to render it — string, number with precision, timestamp with format, boolean, state with a colour map, image, or a clickable button with a link. The row count is whatever the query returns.",
+        "useWhen": [
+            "The user needs to read individual records — event logs, device inventories, order lists, alarm histories.",
+            "More than two or three fields per row matter, so no chart can carry them all.",
+            "Exact values matter more than trends or comparisons.",
+            "Each row should offer a link or action of its own (a column of type 'button')."
+        ],
+        "notFor": [
+            "Spotting a trend, comparing magnitudes, or seeing a distribution — use widget-linechart; a table makes the reader do the work a chart does for them.",
+            "One number that matters more than the rest — use widget-value, or widget-gauge to read it against a range.",
+            "Shares of a total — use widget-doughnut.",
+            "Text written by hand rather than queried — use widget-markdown."
+        ]
+    },
     "type": "object",
     "properties": {
         "title": {

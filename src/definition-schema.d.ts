@@ -103,7 +103,7 @@ export type ColumnDefinitions = {
 /**
  * A data table widget for displaying structured information in rows and columns. Use this widget to present lists, records, or any tabular data with customizable column types and formatting. Supports multiple column types: plain text, numbers with precision control, timestamps with format parsing, state indicators with color mapping, boolean values, clickable buttons with links, and images. Features include column width control, cell styling, horizontal overflow for wide tables, and header/cell separators. Ideal for device lists, event logs, inventory tables, status dashboards, or any scenario requiring organized data presentation in a grid format.
  */
-export interface InputData {
+export interface TableConfiguration {
   title?: Title;
   subTitle?: Subtitle;
   horizontalOverflow?: EnableHorizontalOverflow;

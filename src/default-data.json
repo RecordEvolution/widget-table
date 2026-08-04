@@ -39,10 +39,10 @@
         {
             "header": "Distance",
             "type": "number",
-            "values": [{ "value": 80 }, { "value": 20 }, { "value": 30 }, { "value": 40 }, { "value": 50 }],
+            "values": [{ "value": "80" }, { "value": "20" }, { "value": "30" }, { "value": "40" }, { "value": "50" }],
             "styling": {
                 "width": "220px",
-                "fontWeight": 100,
+                "fontWeight": "100",
                 "precision": 2
             }
         },
@@ -50,11 +50,11 @@
             "header": "Active",
             "type": "boolean",
             "values": [
-                { "value": true },
-                { "value": false },
-                { "value": true },
-                { "value": true },
-                { "value": false }
+                { "value": "true" },
+                { "value": "false" },
+                { "value": "true" },
+                { "value": "true" },
+                { "value": "false" }
             ],
             "styling": {
                 "width": "80px"
@@ -107,11 +107,11 @@
             "header": "Last Update",
             "type": "timestamp",
             "values": [
-                { "value": 1737043245123 },
-                { "value": 1736952000000 },
-                { "value": 1736865600000 },
-                { "value": 1736779200000 },
-                { "value": 1736692800000 }
+                { "value": "1737043245123" },
+                { "value": "1736952000000" },
+                { "value": "1736865600000" },
+                { "value": "1736779200000" },
+                { "value": "1736692800000" }
             ],
             "styling": {
                 "timestampFormat": "yyyy-MM-dd HH:mm:ss.SSS",
